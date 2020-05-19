@@ -1,6 +1,6 @@
-from bw2io.extractors import ExcelExtractor
-from pathlib import Path
 from . import FILENAME
+from .excel_extraction import ExcelExtractor
+from pathlib import Path
 
 DIRPATH = Path(__file__).parent.resolve()
 FILEPATH = DIRPATH / "data" / FILENAME
@@ -101,10 +101,31 @@ class ReCiPeExtractor:
             "column_labels": ["name", "dummy"],
             "indices": (2, 3),
         },
-        # : {
-        #     "column_labels": ,
-        #     "indices": ,
-        # },
+        "Terrestrial ecotoxicity": {
+            "column_labels": ["CAS number", "name", "dummy", "compartment"],
+            "indices": (4, 7),
+            'key_function': lambda s, i: (s[0][i], s[2][i]),
+        },
+        "Freshwater ecotoxicity": {
+            "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
+            "indices": (5, 8),
+            'key_function': lambda s, i: (s[0][i], s[2][i]),
+        },
+        "Marine ecotoxicity": {
+            "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
+            "indices": (5, 8),
+            'key_function': lambda s, i: (s[0][i], s[2][i]),
+        },
+        "Human carcinogenic toxicity": {
+            "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
+            "indices": (5, 8),
+            'key_function': lambda s, i: (s[0][i], s[2][i]),
+        },
+        "Human noncarcinogenic toxicity": {
+            "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
+            "indices": (5, 8),
+            'key_function': lambda s, i: (s[0][i], s[2][i]),
+        },
     }
 
     def __init__(self, filepath=None):
@@ -132,7 +153,7 @@ class ReCiPeExtractor:
                 "perspective": sheet[2][index],
                 "cfs": self.extract_column(
                     self.filter_rows(
-                        sheet[offset:], indices[0]
+                        sheet[offset:], index
                     ),  # Skip section headers
                     column_labels=column_labels,
                     cf_index=index,

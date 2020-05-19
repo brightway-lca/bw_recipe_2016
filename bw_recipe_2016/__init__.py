@@ -1,20 +1,25 @@
 __all__ = (
     "extract_recipe",
+    "FreshwaterEutrophication",
     "get_biosphere_database",
     "GlobalWarming",
-    "StratosphericOzoneDepletion",
     "IonizingRadiation",
+    "LandOccupation",
+    "MarineEutrophication",
+    "OzoneFormationEcosystems",
     "OzoneFormationHumans",
     "ParticulateMatterFormation",
-    "OzoneFormationEcosystems",
+    "StratosphericOzoneDepletion",
     "TerrestrialAcidification",
-    "MarineEutrophication",
-    "FreshwaterEutrophication",
-    "LandOccupation",
-    'WaterConsumption',
-    'MineralResourceScarcity',
-    'FossilResourceScarcity',
     'add_recipe_2016',
+    'FossilResourceScarcity',
+    'FreshwaterEcotoxicity'
+    'HumanCarcinogenicToxicity'
+    'HumanNoncarcinogenicToxicity',
+    'MarineEcotoxicity'
+    'MineralResourceScarcity',
+    'TerrestrialEcotoxicity',
+    'WaterConsumption',
 )
 
 
@@ -27,20 +32,25 @@ from .version import version as __version__
 from .biosphere import get_biosphere_database
 from .extraction import extract_recipe
 from .categories import (
+    FossilResourceScarcity,
+    FreshwaterEcotoxicity,
+    FreshwaterEutrophication,
     GlobalWarming,
-    StratosphericOzoneDepletion,
+    HumanCarcinogenicToxicity,
+    HumanNoncarcinogenicToxicity,
     IonizingRadiation,
+    LandOccupation,
+    LandTransformation,
+    MarineEcotoxicity,
+    MarineEutrophication,
+    MineralResourceScarcity,
+    OzoneFormationEcosystems,
     OzoneFormationHumans,
     ParticulateMatterFormation,
-    OzoneFormationEcosystems,
+    StratosphericOzoneDepletion,
     TerrestrialAcidification,
-    MarineEutrophication,
-    FreshwaterEutrophication,
-    LandTransformation,
-    LandOccupation,
+    TerrestrialEcotoxicity,
     WaterConsumption,
-    FossilResourceScarcity,
-    MineralResourceScarcity,
 )
 
 
@@ -57,6 +67,11 @@ def add_recipe_2016():
         (8, TerrestrialAcidification),
         (9, FreshwaterEutrophication),
         (10, MarineEutrophication),
+        (11, TerrestrialEcotoxicity),
+        (12, FreshwaterEcotoxicity),
+        (13, MarineEcotoxicity),
+        (14, HumanCarcinogenicToxicity),
+        (15, HumanNoncarcinogenicToxicity),
         (16, LandTransformation),
         (17, LandOccupation),
         (18, WaterConsumption),
@@ -64,7 +79,6 @@ def add_recipe_2016():
         (20, FossilResourceScarcity),
     }
     for i, c in categories:
-        print(i)
         category = c(data[i], biosphere)
         category.apply_strategies()
         category.drop_unlinked()

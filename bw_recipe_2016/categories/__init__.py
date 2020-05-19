@@ -8,3 +8,10 @@ from .eutrophication import MarineEutrophication, FreshwaterEutrophication
 from .land import LandTransformation, LandOccupation
 from .water import WaterConsumption
 from .resources import MineralResourceScarcity, FossilResourceScarcity
+from .toxicity import (
+    TerrestrialEcotoxicity,
+    FreshwaterEcotoxicity,
+    MarineEcotoxicity,
+    HumanCarcinogenicToxicity,
+    HumanNoncarcinogenicToxicity,
+)
