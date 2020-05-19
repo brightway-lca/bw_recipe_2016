@@ -8,9 +8,24 @@ def unlinked(elems):
 
 
 def name_matcher(data, mapping):
+    def change_name(a, b):
+        a['name'] = b.lower()
+        return a
+
+    mapping = {k.lower(): v for k, v in mapping.items()}
+
     for ds in data:
+        to_add, to_remove = [], []
         for cf in ds["exchanges"]:
-            cf["name"] = mapping.get(cf["name"].lower(), cf["name"])
+            match = mapping.get(cf["name"].lower())
+            if not match:
+                continue
+            elif isinstance(match, list):
+                to_remove.append(cf)
+                to_add.extend([change_name(deepcopy(cf), name) for name in match])
+            else:
+                cf["name"] = match.lower()
+        ds["exchanges"] = [cf for cf in ds["exchanges"] if cf not in to_remove] + to_add
     return data
 
 
@@ -36,7 +51,12 @@ def match_single(data, other):
             try:
                 cf['input'] = other_dict[(cf["name"].lower(), cf.get("categories"))]
             except KeyError:
-                pass
+                for synonym in cf.get("synonyms", []):
+                    try:
+                        cf['input'] = other_dict[(synonym.lower(), cf.get("categories"))]
+                        break
+                    except KeyError:
+                        pass
     return data
 
 

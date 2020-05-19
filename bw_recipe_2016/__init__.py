@@ -12,6 +12,7 @@ __all__ = (
     "FreshwaterEutrophication",
     "LandOccupation",
     'WaterConsumption',
+    'MineralResourceScarcity',
     'add_recipe_2016',
 )
 
@@ -37,6 +38,7 @@ from .categories import (
     LandTransformation,
     LandOccupation,
     WaterConsumption,
+    MineralResourceScarcity,
 )
 
 
@@ -56,6 +58,7 @@ def add_recipe_2016():
         (16, LandTransformation),
         (17, LandOccupation),
         (18, WaterConsumption),
+        (19, MineralResourceScarcity),
     }
     for i, c in categories:
         print(i)

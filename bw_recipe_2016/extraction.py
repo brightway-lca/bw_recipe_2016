@@ -92,6 +92,15 @@ class ReCiPeExtractor:
             "indices": (2, 3),
             "offset": 2,
         },
+        "Mineral resource scarcity": {
+            "column_labels": ["name", "element"],
+            "indices": (2, 5),
+            'key_function': lambda s, i: (s[0][i], s[2][i]),
+        },
+        # : {
+        #     "column_labels": ,
+        #     "indices": ,
+        # },
         # : {
         #     "column_labels": ,
         #     "indices": ,
