@@ -5,3 +5,5 @@ from .ozone_formation import OzoneFormationHumans, OzoneFormationEcosystems
 from .particulate_matter import ParticulateMatterFormation
 from .terrestrial_acidification import TerrestrialAcidification
 from .eutrophication import MarineEutrophication, FreshwaterEutrophication
+from .land import LandTransformation, LandOccupation
+from .water import WaterConsumption

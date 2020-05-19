@@ -82,6 +82,16 @@ class ReCiPeExtractor:
             "indices": (2, 3),
             "key_function": lambda s, i: "Marine eutrophication",
         },
+        "Land transformation": {
+            "column_labels": ["name", "categories"],
+            "indices": (2, 3),
+            "offset": 2,
+        },
+        "Land occupation": {
+            "column_labels": ["name", "categories"],
+            "indices": (2, 3),
+            "offset": 2,
+        },
         # : {
         #     "column_labels": ,
         #     "indices": ,

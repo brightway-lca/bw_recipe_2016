@@ -10,6 +10,9 @@ __all__ = (
     "TerrestrialAcidification",
     "MarineEutrophication",
     "FreshwaterEutrophication",
+    "LandOccupation",
+    'WaterConsumption',
+    'add_recipe_2016',
 )
 
 
@@ -31,6 +34,9 @@ from .categories import (
     TerrestrialAcidification,
     MarineEutrophication,
     FreshwaterEutrophication,
+    LandTransformation,
+    LandOccupation,
+    WaterConsumption,
 )
 
 
@@ -47,9 +53,13 @@ def add_recipe_2016():
         (8, TerrestrialAcidification),
         (9, FreshwaterEutrophication),
         (10, MarineEutrophication),
+        (16, LandTransformation),
+        (17, LandOccupation),
+        (18, WaterConsumption),
     }
     for i, c in categories:
-        category = c(data, biosphere)
+        print(i)
+        category = c(data[i], biosphere)
         category.apply_strategies()
         category.drop_unlinked()
         category.write_methods(overwrite=True)
