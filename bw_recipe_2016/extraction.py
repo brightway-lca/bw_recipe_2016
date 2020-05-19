@@ -43,6 +43,7 @@ class ReCiPeExtractor:
     This does not do any data matching steps (i.e. changing names to match other nomenclatures). All data transformation is done with strategy functions, in line with ``bw2io`` practice.
 
     """
+
     config = {
         "Global Warming": {
             "column_labels": ["name", "synonyms", "formula"],
@@ -63,16 +64,13 @@ class ReCiPeExtractor:
         "Particulate matter formation": {
             "column_labels": ["dummy", "name"],
             "indices": (2, 5),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Ecosyste damage ozone formation": {
             "column_labels": ["CAS number", "name", "dummy", "dummy"],
             "indices": (4, 5),
         },
-        "Terrestrial acidification": {
-            "column_labels": ["name"],
-            "indices": (2, 3),
-        },
+        "Terrestrial acidification": {"column_labels": ["name"], "indices": (2, 3),},
         "Freshwater eutrophication": {
             "column_labels": ["name", "compartment"],
             "indices": (2, 3),
@@ -95,7 +93,7 @@ class ReCiPeExtractor:
         "Mineral resource scarcity": {
             "column_labels": ["name", "element"],
             "indices": (2, 5),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Fossil resource scarcity": {
             "column_labels": ["name", "dummy"],
@@ -104,27 +102,27 @@ class ReCiPeExtractor:
         "Terrestrial ecotoxicity": {
             "column_labels": ["CAS number", "name", "dummy", "compartment"],
             "indices": (4, 7),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Freshwater ecotoxicity": {
             "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
             "indices": (5, 8),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Marine ecotoxicity": {
             "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
             "indices": (5, 8),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Human carcinogenic toxicity": {
             "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
             "indices": (5, 8),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Human noncarcinogenic toxicity": {
             "column_labels": ["CAS number", "name", "dummy", "dummy", "compartment"],
             "indices": (5, 8),
-            'key_function': lambda s, i: (s[0][i], s[2][i]),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
     }
 
@@ -144,7 +142,9 @@ class ReCiPeExtractor:
     def filter_rows(self, data, required_column):
         return (row for row in data if row[required_column] not in {"", None})
 
-    def harmonize_generic(self, sheet, column_labels, indices, offset=3, key_function=None):
+    def harmonize_generic(
+        self, sheet, column_labels, indices, offset=3, key_function=None
+    ):
         if key_function is None:
             key_function = lambda sheet, index: sheet[0][index]
         return {
@@ -152,9 +152,7 @@ class ReCiPeExtractor:
                 "unit": sheet[1][index],
                 "perspective": sheet[2][index],
                 "cfs": self.extract_column(
-                    self.filter_rows(
-                        sheet[offset:], index
-                    ),  # Skip section headers
+                    self.filter_rows(sheet[offset:], index),  # Skip section headers
                     column_labels=column_labels,
                     cf_index=index,
                 ),

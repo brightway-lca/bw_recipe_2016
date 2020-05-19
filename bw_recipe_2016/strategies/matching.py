@@ -9,7 +9,7 @@ def unlinked(elems):
 
 def name_matcher(data, mapping):
     def change_name(a, b):
-        a['name'] = b.lower()
+        a["name"] = b.lower()
         return a
 
     mapping = {k.lower(): v for k, v in mapping.items()}
@@ -44,16 +44,18 @@ def category_match(a, b):
 
 def match_single(data, other):
     """Match to a single, specified category"""
-    other_dict = {(ds["name"].lower(), tuple(ds['categories'])): ds.key for ds in other}
+    other_dict = {(ds["name"].lower(), tuple(ds["categories"])): ds.key for ds in other}
 
     for ds in data:
         for cf in unlinked(ds["exchanges"]):
             try:
-                cf['input'] = other_dict[(cf["name"].lower(), cf.get("categories"))]
+                cf["input"] = other_dict[(cf["name"].lower(), cf.get("categories"))]
             except KeyError:
                 for synonym in cf.get("synonyms", []):
                     try:
-                        cf['input'] = other_dict[(synonym.lower(), cf.get("categories"))]
+                        cf["input"] = other_dict[
+                            (synonym.lower(), cf.get("categories"))
+                        ]
                         break
                     except KeyError:
                         pass

@@ -1,25 +1,25 @@
 __all__ = (
+    "add_recipe_2016",
     "extract_recipe",
+    "FossilResourceScarcity",
+    "FreshwaterEcotoxicity",
     "FreshwaterEutrophication",
     "get_biosphere_database",
     "GlobalWarming",
+    "HumanCarcinogenicToxicity",
+    "HumanNoncarcinogenicToxicity",
     "IonizingRadiation",
     "LandOccupation",
+    "MarineEcotoxicity",
     "MarineEutrophication",
+    "MineralResourceScarcity",
     "OzoneFormationEcosystems",
     "OzoneFormationHumans",
     "ParticulateMatterFormation",
     "StratosphericOzoneDepletion",
     "TerrestrialAcidification",
-    'add_recipe_2016',
-    'FossilResourceScarcity',
-    'FreshwaterEcotoxicity'
-    'HumanCarcinogenicToxicity'
-    'HumanNoncarcinogenicToxicity',
-    'MarineEcotoxicity'
-    'MineralResourceScarcity',
-    'TerrestrialEcotoxicity',
-    'WaterConsumption',
+    "TerrestrialEcotoxicity",
+    "WaterConsumption",
 )
 
 

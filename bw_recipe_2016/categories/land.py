@@ -1,11 +1,20 @@
 from ..base import ReCiPe2016
 from ..strategies import match_multiple, generic_reformat
-from ..strategies.land import complete_method_name, set_unit, reset_categories, add_missing_flows
+from ..strategies.land import (
+    complete_method_name,
+    set_unit,
+    reset_categories,
+    add_missing_flows,
+)
 from functools import partial
 
 
 class LandTransformation(ReCiPe2016):
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'natural land transformation', 'NLTP')
+    previous_reference = (
+        "ReCiPe Midpoint (E) V1.13",
+        "natural land transformation",
+        "NLTP",
+    )
 
     def __init__(self, data, biosphere):
         self.data = data
@@ -19,7 +28,11 @@ class LandTransformation(ReCiPe2016):
 
 
 class LandOccupation(ReCiPe2016):
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'agricultural land occupation', 'ALOP')
+    previous_reference = (
+        "ReCiPe Midpoint (E) V1.13",
+        "agricultural land occupation",
+        "ALOP",
+    )
 
     def __init__(self, data, biosphere):
         self.data = data

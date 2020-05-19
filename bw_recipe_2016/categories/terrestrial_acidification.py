@@ -13,17 +13,21 @@ class TerrestrialAcidification(ReCiPe2016):
     name_mapping = {
         "no": "nitric oxide",
         "no3": "nitrate",
-        'nh3': 'ammonia',
-        'nox': 'nitrogen oxides',
-        'pm2.5': 'particulates, < 2.5 um',
-        'no2': 'nitrogen dioxide',
+        "nh3": "ammonia",
+        "nox": "nitrogen oxides",
+        "pm2.5": "particulates, < 2.5 um",
+        "no2": "nitrogen dioxide",
         # 'so': '',
-        'so2': 'sulfur dioxide',
+        "so2": "sulfur dioxide",
         # 'so3': '',
-        'sox': 'sulfur oxides',
+        "sox": "sulfur oxides",
         "h2so4 (sulphuric acid)": "sulfuric acid",
     }
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'terrestrial acidification', 'TAP500')
+    previous_reference = (
+        "ReCiPe Midpoint (E) V1.13",
+        "terrestrial acidification",
+        "TAP500",
+    )
 
     def __init__(self, data, biosphere):
         self.data = data

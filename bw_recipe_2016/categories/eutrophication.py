@@ -11,11 +11,15 @@ from functools import partial
 
 class FreshwaterEutrophication(ReCiPe2016):
     name_mapping = {
-        "phosphorus (p)": 'phosphorus',
-        "phosphate (po43-)": 'phosphate',
-        'Phosphoric acid': 'phosphoric acid',
+        "phosphorus (p)": "phosphorus",
+        "phosphate (po43-)": "phosphate",
+        "Phosphoric acid": "phosphoric acid",
     }
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'freshwater eutrophication', 'FEP')
+    previous_reference = (
+        "ReCiPe Midpoint (E) V1.13",
+        "freshwater eutrophication",
+        "FEP",
+    )
 
     def __init__(self, data, biosphere):
         self.data = data
@@ -31,14 +35,14 @@ class FreshwaterEutrophication(ReCiPe2016):
 class MarineEutrophication(ReCiPe2016):
     name_mapping = {
         "n": "nitrogen",
-        "nh4+": 'ammonium, ion',
-        'nh3': 'ammonia',
+        "nh4+": "ammonium, ion",
+        "nh3": "ammonia",
         "no": "nitric oxide",
-        'no2': 'nitrogen dioxide',
+        "no2": "nitrogen dioxide",
         "no3": "nitrate",
-        'nox': 'nitrogen oxides',
+        "nox": "nitrogen oxides",
     }
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'marine eutrophication', 'MEP')
+    previous_reference = ("ReCiPe Midpoint (E) V1.13", "marine eutrophication", "MEP")
 
     def __init__(self, data, biosphere):
         self.data = data

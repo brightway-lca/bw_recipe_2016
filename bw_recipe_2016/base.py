@@ -46,7 +46,7 @@ class ReCiPe2016(LCIAImporter):
         if not hasattr(self, "previous_reference"):
             raise ValueError("No previous reference method found")
         names_found_in_data = {
-            get_activity(cf['input'])["name"].lower()
+            get_activity(cf["input"])["name"].lower()
             for ds in self.data
             for cf in ds["exchanges"]
             if cf.get("input")

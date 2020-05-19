@@ -17,8 +17,8 @@ class OzoneFormationHumans(ReCiPe2016):
     name_mapping = {
         "nitrogen oxides (as nitrogen dioxide)": "nitrogen oxides",
         "nmvoc (non-methane volatile organic chemicals)": "nmvoc, non-methane volatile organic compounds, unspecified origin",
-        "ethylene": 'ethene',
-        'trichloroethylene': 'ethene, trichloro-',
+        "ethylene": "ethene",
+        "trichloroethylene": "ethene, trichloro-",
         "no": "nitric oxide",
         "no3": "nitrate",
     }
@@ -41,15 +41,9 @@ class OzoneFormationHumans(ReCiPe2016):
             partial(match_multiple, other=self.biosphere,),
             partial(match_cas_number, other=self.biosphere,),
             chemid_name_mapping,
-            partial(
-                match_multiple,
-                other=self.biosphere,
-            ),
+            partial(match_multiple, other=self.biosphere,),
             chemid_cas_to_name_mapping,
-            partial(
-                match_multiple,
-                other=self.biosphere,
-            ),
+            partial(match_multiple, other=self.biosphere,),
         ]
 
 

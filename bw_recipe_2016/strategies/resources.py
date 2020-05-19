@@ -3,9 +3,9 @@ from .. import BASE_NAME
 
 def remove_asterisk(data):
     for ds in data:
-        for cf in ds['exchanges']:
-            if cf['name'].endswith("*"):
-                cf['name'] = cf['name'][:-1]
+        for cf in ds["exchanges"]:
+            if cf["name"].endswith("*"):
+                cf["name"] = cf["name"][:-1]
     return data
 
 
@@ -25,8 +25,8 @@ def add_fossil_natural_resource_category(data):
 
 def add_synonyms(data):
     for ds in data:
-        for cf in ds['exchanges']:
-            cf['synonyms'] = [cf['name'] + ", in ground"]
+        for cf in ds["exchanges"]:
+            cf["synonyms"] = [cf["name"] + ", in ground"]
     return data
 
 

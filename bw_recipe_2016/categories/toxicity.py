@@ -17,19 +17,23 @@ from functools import partial
 class TerrestrialEcotoxicity(ReCiPe2016):
     # Have to fix names manually because CAS numbers for metal ions are wrong!
     name_mapping = {
-        "Ag(I)": 'silver, ion',
-        "As(V)": 'arsenic, ion',
-        "Cd(II)": 'cadmium, ion',
-        "Cr(III)": 'chromium, ion',
-        "Cr(VI)": 'Chromium VI',
+        "Ag(I)": "silver, ion",
+        "As(V)": "arsenic, ion",
+        "Cd(II)": "cadmium, ion",
+        "Cr(III)": "chromium, ion",
+        "Cr(VI)": "Chromium VI",
         # "Cu(II)": , Ecoinvent only has Copper(I)
-        "Mo(VI)": 'Molybdenum',
-        "Ni(II)": 'Nickel, ion',
+        "Mo(VI)": "Molybdenum",
+        "Ni(II)": "Nickel, ion",
         # "Sn(II)": , Ecoinvent only has Tin(IV)
-        "V(V)": 'Vanadium, ion',
-        "Zn(II)": 'Zinc, ion',
+        "V(V)": "Vanadium, ion",
+        "Zn(II)": "Zinc, ion",
     }
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'terrestrial ecotoxicity', 'TETPinf')
+    previous_reference = (
+        "ReCiPe Midpoint (E) V1.13",
+        "terrestrial ecotoxicity",
+        "TETPinf",
+    )
 
     def __init__(self, data, biosphere):
         self.data = data
@@ -43,29 +47,27 @@ class TerrestrialEcotoxicity(ReCiPe2016):
             partial(match_multiple, other=self.biosphere,),
             partial(match_cas_number, other=self.biosphere,),
             chemid_name_mapping,
-            partial(
-                match_multiple,
-                other=self.biosphere,
-            ),
+            partial(match_multiple, other=self.biosphere,),
             chemid_cas_to_name_mapping,
-            partial(
-                match_multiple,
-                other=self.biosphere,
-            ),
+            partial(match_multiple, other=self.biosphere,),
         ]
 
 
 class FreshwaterEcotoxicity(TerrestrialEcotoxicity):
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'freshwater ecotoxicity', 'FETPinf')
+    previous_reference = (
+        "ReCiPe Midpoint (E) V1.13",
+        "freshwater ecotoxicity",
+        "FETPinf",
+    )
 
 
 class MarineEcotoxicity(TerrestrialEcotoxicity):
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'marine ecotoxicity', 'METPinf')
+    previous_reference = ("ReCiPe Midpoint (E) V1.13", "marine ecotoxicity", "METPinf")
 
 
 class HumanCarcinogenicToxicity(TerrestrialEcotoxicity):
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'human toxicity', 'HTPinf'),
+    previous_reference = (("ReCiPe Midpoint (E) V1.13", "human toxicity", "HTPinf"),)
 
 
 class HumanNoncarcinogenicToxicity(TerrestrialEcotoxicity):
-    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'human toxicity', 'HTPinf'),
+    previous_reference = (("ReCiPe Midpoint (E) V1.13", "human toxicity", "HTPinf"),)
