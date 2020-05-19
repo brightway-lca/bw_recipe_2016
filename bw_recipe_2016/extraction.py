@@ -97,10 +97,10 @@ class ReCiPeExtractor:
             "indices": (2, 5),
             'key_function': lambda s, i: (s[0][i], s[2][i]),
         },
-        # : {
-        #     "column_labels": ,
-        #     "indices": ,
-        # },
+        "Fossil resource scarcity": {
+            "column_labels": ["name", "dummy"],
+            "indices": (2, 3),
+        },
         # : {
         #     "column_labels": ,
         #     "indices": ,

@@ -3,10 +3,17 @@ from ..strategies import (
     fix_unit_string,
     generic_reformat,
     match_single,
+    match_multiple,
     name_matcher,
 )
 from ..strategies.particulate_matter import complete_method_name
-from ..strategies.resources import remove_asterisk, add_natural_resource_category, add_synonyms
+from ..strategies.resources import (
+    remove_asterisk,
+    add_fossil_natural_resource_category,
+    add_mineral_natural_resource_category,
+    add_synonyms,
+    fossil_method_name,
+)
 from functools import partial
 
 
@@ -197,8 +204,27 @@ class MineralResourceScarcity(ReCiPe2016):
             partial(name_matcher, mapping=self.name_mapping),
             add_synonyms,
             complete_method_name,
-            add_natural_resource_category,
+            add_mineral_natural_resource_category,
             partial(match_single, other=self.biosphere,),
         ]
 
 
+class FossilResourceScarcity(ReCiPe2016):
+    name_mapping = {
+        "Crude oil": 'Oil, crude, in ground',
+        "Natural gas": 'Gas, natural, in ground',
+        "Hard coal": 'Coal, hard, unspecified, in ground',
+        "Brown coal": 'Coal, brown, in ground',
+        "Peat": "Peat, in ground",
+    }
+    previous_reference = ('ReCiPe Midpoint (E) V1.13', 'fossil depletion', 'FDP')
+
+    def __init__(self, data, biosphere):
+        self.data = data
+        self.biosphere = biosphere
+        self.strategies = self.global_strategies + [
+            partial(name_matcher, mapping=self.name_mapping),
+            fossil_method_name,
+            add_fossil_natural_resource_category,
+            partial(match_multiple, other=self.biosphere,),
+        ]

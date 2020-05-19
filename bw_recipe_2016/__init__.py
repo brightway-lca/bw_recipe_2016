@@ -13,6 +13,7 @@ __all__ = (
     "LandOccupation",
     'WaterConsumption',
     'MineralResourceScarcity',
+    'FossilResourceScarcity',
     'add_recipe_2016',
 )
 
@@ -38,6 +39,7 @@ from .categories import (
     LandTransformation,
     LandOccupation,
     WaterConsumption,
+    FossilResourceScarcity,
     MineralResourceScarcity,
 )
 
@@ -59,6 +61,7 @@ def add_recipe_2016():
         (17, LandOccupation),
         (18, WaterConsumption),
         (19, MineralResourceScarcity),
+        (20, FossilResourceScarcity),
     }
     for i, c in categories:
         print(i)
