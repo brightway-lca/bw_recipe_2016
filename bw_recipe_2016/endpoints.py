@@ -349,6 +349,16 @@ def create_aggregated_endpoints():
             children = [m for m in methods if m[:len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME and perspective in m and section in m and "Aggregated" not in m]
             combine_methods(name, children, metadata)
 
+    for perspective in perspectives:
+        name = BASE_ENDPOINT_NAME + ("Ecosystems", "Aggregated", perspective)
+        metadata = {
+            'unit': 'Species∙yr',
+            'filename': FILENAME,
+            'description': ''
+        }
+        children = [m for m in methods if m[:len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME and perspective in m and m[3] in ('Freshwater ecosystems', 'Marine ecosystems', 'Terrestrial ecosystems') and m[4] == 'Aggregated']
+        combine_methods(name, children, metadata)
+
 
 def combine_methods(name, methods, metadata):
     data = defaultdict(float)
