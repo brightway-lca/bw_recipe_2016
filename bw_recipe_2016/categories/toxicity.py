@@ -8,6 +8,7 @@ from ..strategies import (
     match_cas_number,
     match_multiple,
     name_matcher,
+    final_method_name,
 )
 from ..strategies.particulate_matter import complete_method_name
 from ..strategies.toxicity import set_toxicity_categories
@@ -50,6 +51,7 @@ class TerrestrialEcotoxicity(ReCiPe2016):
             partial(match_multiple, other=self.biosphere,),
             chemid_cas_to_name_mapping,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]
 
 

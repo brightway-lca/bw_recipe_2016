@@ -3,9 +3,10 @@ from ..strategies import (
     name_matcher,
     match_multiple,
     fix_water_categories,
-    complete_method_name,
     tupleize_categories,
+    final_method_name,
 )
+from ..strategies.particulate_matter import complete_method_name
 from functools import partial
 
 
@@ -33,7 +34,8 @@ class IonizingRadiation(ReCiPe2016):
         "pu alphaa": "plutonium-alpha",
         "u-238a": "uranium-238",
         "xe-133": "xenon-133",
-        # What ecoinvent calls 'plutonium-alpha' could be Pu 239?
+        # Ecoinvent calls the same substance three names, because reasons...
+        "U-238a": ["Uranium", "Uranium alpha", "Uranium-238"],
     }
     previous_reference = ("ReCiPe Midpoint (E) V1.13", "ionising radiation", "IRP_HE")
 
@@ -46,4 +48,5 @@ class IonizingRadiation(ReCiPe2016):
             tupleize_categories,
             complete_method_name,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]

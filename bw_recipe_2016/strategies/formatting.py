@@ -1,4 +1,4 @@
-from .. import FILENAME, BASE_NAME
+from .. import FILENAME, BASE_MIDPOINT_NAME
 
 
 def generic_reformat(data):
@@ -51,7 +51,7 @@ def generic_reformat(data):
 
 def complete_method_name(data):
     for ds in data:
-        ds["name"] = BASE_NAME + ds["name"]
+        ds["name"] = BASE_MIDPOINT_NAME + ds["name"]
     return data
 
 

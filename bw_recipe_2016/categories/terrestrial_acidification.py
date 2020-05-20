@@ -4,6 +4,7 @@ from ..strategies import (
     match_multiple,
     add_air_category,
     complete_method_name,
+    final_method_name,
 )
 from ..strategies.ozone_formation import drop_last_name_component
 from functools import partial
@@ -37,4 +38,5 @@ class TerrestrialAcidification(ReCiPe2016):
             add_air_category,
             drop_last_name_component,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]

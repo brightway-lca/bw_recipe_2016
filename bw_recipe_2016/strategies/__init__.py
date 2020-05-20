@@ -19,3 +19,4 @@ from .matching import (
 )
 from .global_warming import add_air_category
 from .ionizing_radiation import fix_water_categories
+from .names import final_method_name

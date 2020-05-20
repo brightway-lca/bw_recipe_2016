@@ -4,6 +4,7 @@ from ..strategies import (
     match_multiple,
     add_air_category,
     complete_method_name,
+    final_method_name,
 )
 from ..strategies.global_warming import add_biomass_stock_cfs
 from functools import partial
@@ -61,4 +62,5 @@ class GlobalWarming(ReCiPe2016):
             complete_method_name,
             # drop_known_missing,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]

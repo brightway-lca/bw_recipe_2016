@@ -1,9 +1,9 @@
-from .. import BASE_NAME
+from .. import BASE_MIDPOINT_NAME
 
 
 def complete_method_name(data, name):
     for ds in data:
-        ds["name"] = BASE_NAME + (name,)
+        ds["name"] = BASE_MIDPOINT_NAME + (name,)
     return data
 
 

@@ -56,6 +56,7 @@ class ReCiPeExtractor:
         "Ionizing radiation": {
             "column_labels": ["name", "synonyms", "dummy", "categories"],
             "indices": (4, 7),
+            "key_function": lambda s, i: (s[0][i], s[2][i]),
         },
         "Human damage ozone formation": {
             "column_labels": ["CAS number", "name", "dummy", "dummy"],

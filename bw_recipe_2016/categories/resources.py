@@ -1,3 +1,4 @@
+from .. import BASE_ENDPOINT_NAME, FILENAME
 from ..base import ReCiPe2016
 from ..strategies import (
     fix_unit_string,
@@ -5,6 +6,7 @@ from ..strategies import (
     match_single,
     match_multiple,
     name_matcher,
+    final_method_name,
 )
 from ..strategies.particulate_matter import complete_method_name
 from ..strategies.resources import (
@@ -15,6 +17,7 @@ from ..strategies.resources import (
     fossil_method_name,
 )
 from functools import partial
+from bw2io.importers.base_lcia import LCIAImporter
 
 
 class MineralResourceScarcity(ReCiPe2016):
@@ -195,6 +198,7 @@ class MineralResourceScarcity(ReCiPe2016):
             complete_method_name,
             add_mineral_natural_resource_category,
             partial(match_single, other=self.biosphere,),
+            final_method_name,
         ]
 
 
@@ -216,4 +220,116 @@ class FossilResourceScarcity(ReCiPe2016):
             fossil_method_name,
             add_fossil_natural_resource_category,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
+        ]
+
+
+class FossilResourceScarcityEndpoint(LCIAImporter):
+    data = [
+        {
+            "name": BASE_ENDPOINT_NAME + ("Fossil resource scarcity", "Individualist"),
+            "unit": "USD2013/(kg or nM3)",
+            "filename": FILENAME,
+            "description": "",
+            "exchanges": [
+                {
+                    "name": "Oil, crude, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.46,
+                },
+                {
+                    "name": "Gas, natural, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.3,
+                },
+                {
+                    "name": "Coal, hard, unspecified, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.03,
+                },
+                {
+                    "name": "Coal, brown, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.0,
+                },
+                {
+                    "name": "Peat, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.0,
+                },
+            ],
+        },
+        {
+            "name": BASE_ENDPOINT_NAME + ("Fossil resource scarcity", "Hierarchist"),
+            "unit": "USD2013/(kg or nM3)",
+            "filename": FILENAME,
+            "description": "",
+            "exchanges": [
+                {
+                    "name": "Oil, crude, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.46,
+                },
+                {
+                    "name": "Gas, natural, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.3,
+                },
+                {
+                    "name": "Coal, hard, unspecified, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.03,
+                },
+                {
+                    "name": "Coal, brown, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.0,
+                },
+                {
+                    "name": "Peat, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.0,
+                },
+            ],
+        },
+        {
+            "name": BASE_ENDPOINT_NAME + ("Fossil resource scarcity", "Egalitarian"),
+            "unit": "USD2013/(kg or nM3)",
+            "filename": FILENAME,
+            "description": "",
+            "exchanges": [
+                {
+                    "name": "Oil, crude, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.46,
+                },
+                {
+                    "name": "Gas, natural, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.3,
+                },
+                {
+                    "name": "Coal, hard, unspecified, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.03,
+                },
+                {
+                    "name": "Coal, brown, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.03,
+                },
+                {
+                    "name": "Peat, in ground",
+                    "categories": ("natural resource",),
+                    "amount": 0.03,
+                },
+            ],
+        },
+    ]
+
+    def __init__(self, biosphere):
+        self.biosphere = biosphere
+        self.strategies = [
+            partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]

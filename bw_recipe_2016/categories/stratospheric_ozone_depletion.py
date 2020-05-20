@@ -4,6 +4,7 @@ from ..strategies import (
     match_multiple,
     add_air_category,
     complete_method_name,
+    final_method_name,
 )
 from functools import partial
 
@@ -39,4 +40,5 @@ class StratosphericOzoneDepletion(ReCiPe2016):
             add_air_category,
             complete_method_name,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]

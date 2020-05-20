@@ -8,6 +8,7 @@ from ..strategies import (
     match_cas_number,
     match_multiple,
     name_matcher,
+    final_method_name,
 )
 from ..strategies.ozone_formation import drop_last_name_component
 from functools import partial
@@ -44,6 +45,7 @@ class OzoneFormationHumans(ReCiPe2016):
             partial(match_multiple, other=self.biosphere,),
             chemid_cas_to_name_mapping,
             partial(match_multiple, other=self.biosphere,),
+            final_method_name,
         ]
 
 

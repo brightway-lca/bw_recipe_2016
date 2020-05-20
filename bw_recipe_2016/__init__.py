@@ -1,7 +1,9 @@
 __all__ = (
     "add_recipe_2016",
+    "delete_recipe_2016",
     "extract_recipe",
     "FossilResourceScarcity",
+    "FossilResourceScarcityEndpoint",
     "FreshwaterEcotoxicity",
     "FreshwaterEutrophication",
     "get_biosphere_database",
@@ -24,6 +26,8 @@ __all__ = (
 
 
 BASE_NAME = ("ReCiPe 2016", "v1.1 (20180117)")
+BASE_MIDPOINT_NAME = BASE_NAME + ("Midpoint",)
+BASE_ENDPOINT_NAME = BASE_NAME + ("Endpoint",)
 FILENAME = "ReCiPe2016_CFs_v1.1_20180117.xlsx"
 
 
@@ -33,6 +37,7 @@ from .biosphere import get_biosphere_database
 from .extraction import extract_recipe
 from .categories import (
     FossilResourceScarcity,
+    FossilResourceScarcityEndpoint,
     FreshwaterEcotoxicity,
     FreshwaterEutrophication,
     GlobalWarming,
@@ -83,3 +88,12 @@ def add_recipe_2016():
         category.apply_strategies()
         category.drop_unlinked()
         category.write_methods(overwrite=True)
+
+
+def delete_recipe_2016():
+    from bw2data import methods
+
+    all_methods = list(methods)
+    for method_name in all_methods:
+        if method_name[: len(BASE_NAME)] == BASE_NAME:
+            del methods[method_name]

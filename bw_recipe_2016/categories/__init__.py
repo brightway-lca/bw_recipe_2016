@@ -7,7 +7,11 @@ from .terrestrial_acidification import TerrestrialAcidification
 from .eutrophication import MarineEutrophication, FreshwaterEutrophication
 from .land import LandTransformation, LandOccupation
 from .water import WaterConsumption
-from .resources import MineralResourceScarcity, FossilResourceScarcity
+from .resources import (
+    MineralResourceScarcity,
+    FossilResourceScarcity,
+    FossilResourceScarcityEndpoint,
+)
 from .toxicity import (
     TerrestrialEcotoxicity,
     FreshwaterEcotoxicity,

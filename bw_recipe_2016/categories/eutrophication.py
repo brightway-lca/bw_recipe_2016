@@ -3,6 +3,7 @@ from ..strategies import (
     name_matcher,
     match_single,
     complete_method_name,
+    final_method_name,
 )
 from ..strategies.eutrophication import add_water_category
 from ..strategies.ozone_formation import drop_last_name_component
@@ -29,6 +30,7 @@ class FreshwaterEutrophication(ReCiPe2016):
             add_water_category,
             drop_last_name_component,
             partial(match_single, other=self.biosphere,),
+            final_method_name,
         ]
 
 
@@ -52,4 +54,5 @@ class MarineEutrophication(ReCiPe2016):
             add_water_category,
             drop_last_name_component,
             partial(match_single, other=self.biosphere,),
+            final_method_name,
         ]

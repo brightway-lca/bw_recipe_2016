@@ -1,6 +1,6 @@
-from .. import BASE_NAME, FILENAME
+from .. import BASE_MIDPOINT_NAME, FILENAME
 from ..base import ReCiPe2016
-from ..strategies import match_single
+from ..strategies import match_single, final_method_name
 from functools import partial
 
 FLOWS = [
@@ -28,7 +28,7 @@ class WaterConsumption(ReCiPe2016):
     # Provided data is effectively useless, do it ourselves
     data = [
         {
-            "name": BASE_NAME + ("Water consumption",),
+            "name": BASE_MIDPOINT_NAME + ("Water consumption",),
             "unit": "m3-eq.",
             "filename": FILENAME,
             "description": "",
@@ -40,4 +40,5 @@ class WaterConsumption(ReCiPe2016):
         self.biosphere = biosphere
         self.strategies = [
             partial(match_single, other=self.biosphere),
+            final_method_name,
         ]
