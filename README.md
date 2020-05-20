@@ -60,6 +60,8 @@ ReCiPe 2016 provides five endpoints:
 * Marine ecosystems
 * Terrestrial ecosystems
 
+Combined with the three perspectives, the following endpoints are available:
+
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Ecotoxicity', 'Freshwater', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Ecotoxicity', 'Freshwater', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Ecotoxicity', 'Freshwater', 'Individualist')
