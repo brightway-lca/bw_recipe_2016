@@ -134,21 +134,32 @@ Combined with the three perspectives, the following endpoints are available:
 
 ### Aggregated Endpoints
 
+#### Ecosystems
+
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Egalitarian')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Individualist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Aggregated', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Aggregated', 'Individualist')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Egalitarian')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Hierarchist')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Individualist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Marine ecosystems', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Marine ecosystems', 'Aggregated', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Marine ecosystems', 'Aggregated', 'Individualist')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Egalitarian')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Hierarchist')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Individualist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Terrestrial ecosystems', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Terrestrial ecosystems', 'Aggregated', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Terrestrial ecosystems', 'Aggregated', 'Individualist')
+
+#### Human health
+
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Egalitarian')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Hierarchist')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Individualist')
+
+#### Resources
+
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Egalitarian')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Hierarchist')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Individualist')
 
 ## Usage
 
