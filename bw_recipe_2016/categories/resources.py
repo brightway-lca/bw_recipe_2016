@@ -89,8 +89,8 @@ class MineralResourceScarcity(ReCiPe2016):
             "nickel, ni 2.5e+0%, in mixed ore, in ground",
         ],
         "Graphite": "Metamorphous rock, graphite containing, in ground",
+        "Iron": "Iron, in ground",
         "Iron ore": [
-            "Iron, in ground",
             r"Iron, 46% in ore, 25% in crude ore, in ground",
             r"Iron, 72% in magnetite, 14% in crude ore, in ground",
         ],
