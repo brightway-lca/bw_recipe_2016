@@ -24,7 +24,7 @@ setup(
         "bw2data",
         "requests",
     ],
-    url="your_url_here",
+    url="https://github.com/brightway-lca/bw_recipe_2016",
     long_description_content_type="text/markdown",
     long_description=open("README.md").read(),
     description="Import ReCiPe 2016 into Brightway2",
