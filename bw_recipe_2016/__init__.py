@@ -1,5 +1,7 @@
 __all__ = (
     "add_recipe_2016",
+    "create_aggregated_endpoints",
+    "create_single_endpoints",
     "delete_recipe_2016",
     "extract_recipe",
     "FossilResourceScarcity",
@@ -57,6 +59,7 @@ from .categories import (
     TerrestrialEcotoxicity,
     WaterConsumption,
 )
+from .endpoints import create_single_endpoints, create_aggregated_endpoints
 
 
 def add_recipe_2016():
@@ -88,6 +91,9 @@ def add_recipe_2016():
         category.apply_strategies()
         category.drop_unlinked()
         category.write_methods(overwrite=True)
+
+    create_single_endpoints(data[1])
+    create_aggregated_endpoints()
 
 
 def delete_recipe_2016():

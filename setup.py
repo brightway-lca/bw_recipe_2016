@@ -18,7 +18,7 @@ setup(
     author="Chris Mutel",
     author_email="cmutel@gmail.com",
     license="BSD 3-clause",
-    package_data={"bw_recipe_2016": ["data"]},
+    package_data={"bw_recipe_2016": ["data/*.xlsx", "data/*.json"]},
     install_requires=[
         "bw2io",
         "bw2data",

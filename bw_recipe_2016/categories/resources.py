@@ -227,7 +227,7 @@ class FossilResourceScarcity(ReCiPe2016):
 class FossilResourceScarcityEndpoint(LCIAImporter):
     data = [
         {
-            "name": BASE_ENDPOINT_NAME + ("Fossil resource scarcity", "Individualist"),
+            "name": BASE_ENDPOINT_NAME + ("Resources", "Fossil resource scarcity", "Individualist"),
             "unit": "USD2013/(kg or nM3)",
             "filename": FILENAME,
             "description": "",
@@ -260,7 +260,7 @@ class FossilResourceScarcityEndpoint(LCIAImporter):
             ],
         },
         {
-            "name": BASE_ENDPOINT_NAME + ("Fossil resource scarcity", "Hierarchist"),
+            "name": BASE_ENDPOINT_NAME + ("Resources", "Fossil resource scarcity", "Hierarchist"),
             "unit": "USD2013/(kg or nM3)",
             "filename": FILENAME,
             "description": "",
@@ -293,7 +293,8 @@ class FossilResourceScarcityEndpoint(LCIAImporter):
             ],
         },
         {
-            "name": BASE_ENDPOINT_NAME + ("Fossil resource scarcity", "Egalitarian"),
+            "name": BASE_ENDPOINT_NAME
+            + ("Resources", "Fossil resource scarcity", "Egalitarian"),
             "unit": "USD2013/(kg or nM3)",
             "filename": FILENAME,
             "description": "",

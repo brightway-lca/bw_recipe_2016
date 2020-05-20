@@ -7,6 +7,8 @@ SUBSTITUTIONS = {
     "I": "Individualist",
     "H": "Hierarchist",
     "E": "Egalitarian",
+    "Individualistic": "Individualist",
+    "Hierarchic": "Hierarchist",
     "PMFP": "Particulate Matter Formation",
     "GWP20": ("Global Warming", "20 year timescale"),
     "GWP100": ("Global Warming", "100 year timescale"),
