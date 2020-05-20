@@ -159,7 +159,7 @@ add_recipe_2016()
 
 ## Installation
 
-Use `pip` or `conda`.
+`pip install bw-recipe-2016`
 
 ## Parsing ReCiPe output files
 
