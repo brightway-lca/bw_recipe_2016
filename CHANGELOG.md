@@ -1,19 +1,11 @@
 # Changelog
-All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### 0.1.1 (2020-05-20)
 
-## [Unreleased]
-### Changed
-- XXX
+* Added more water categories to eutrophication
+* Created aggregated ecosystems total endpoint methods
+* Change handling of `iron` and `iron ore` in mineral resources
 
-## [0.1.0] - 2019-03-25
-### Added
-- YYY
+## 0.1 (2020-05-20)
 
-### Changed
-- ZZZ
-
-### Removed
-- b
+Initial release
