@@ -20,7 +20,6 @@ def set_toxicity_categories(data):
         "urbanair": [
             ("air", "urban air close to ground"),
             ("air", "indoor"),
-            ("air", "urban air close to ground"),
         ],
     }
 
