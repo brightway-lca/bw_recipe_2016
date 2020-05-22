@@ -1,6 +1,10 @@
 # Changelog
 
-### 0.2 (2020-05-22)
+#### 0.2.1 (2020-05-22)
+
+* Added a weighted single score indicator
+
+## 0.2 (2020-05-22)
 
 * `add_recipe_2016` not deletes ReCiPe before importing it
 * Fix error with `match_cas_numbers` not following the given categories and subcategories
