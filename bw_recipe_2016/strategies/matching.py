@@ -42,6 +42,10 @@ def category_match(a, b):
     return tuple(a["categories"][: len(b["categories"])]) == tuple(b["categories"])
 
 
+def category_match_exact(a, b):
+    return tuple(a["categories"]) == tuple(b["categories"])
+
+
 def match_single(data, other):
     """Match to a single, specified category"""
     other_dict = {(ds["name"].lower(), tuple(ds["categories"])): ds.key for ds in other}
@@ -86,28 +90,44 @@ def match_multiple(data, other):
                         to_remove.append(cf)
                         to_add.extend(
                             [
-                                add_flow(deepcopy(cf), ds)
-                                for ds in other_dict[synonym.lower()]
-                                if category_match(ds, cf)
+                                add_flow(deepcopy(cf), o)
+                                for o in other_dict[synonym.lower()]
+                                if category_match(o, cf)
                             ]
                         )
         ds["exchanges"] = [cf for cf in ds["exchanges"] if cf not in to_remove] + to_add
     return data
 
 
-def match_cas_number(data, other):
+def match_cas_number(data, other, exact_category=False):
     """Match based on `CAS number <https://en.wikipedia.org/wiki/CAS_Registry_Number>`. Uses the key ``CAS number`` for elements in both ``data`` and ``other``."""
-    lookup = {
-        canonical_cas(elem["CAS number"]): elem.key
-        for elem in other
-        if canonical_cas(elem.get("CAS number"))
-    }
+    lookup = defaultdict(list)
+
+    for elem in other:
+        if not elem.get("CAS number"):
+            continue
+        lookup[canonical_cas(elem.get("CAS number"))].append(elem)
+
+    category_function = category_match_exact if exact_category else category_match
+
     for ds in data:
+        to_add, to_remove = [], []
         for cf in unlinked(ds["exchanges"]):
             try:
-                cf["input"] = lookup[canonical_cas(cf["CAS number"])]
+                possibles = lookup[canonical_cas(cf["CAS number"])]
+                to_add.extend(
+                    [
+                        add_flow(deepcopy(cf), o)
+                        for o in possibles
+                        if category_function(o, cf)
+                    ]
+                )
+                to_remove.append(cf)
             except KeyError:
                 pass
+
+        ds["exchanges"] = [cf for cf in ds["exchanges"] if cf not in to_remove] + to_add
+
     return data
 
 

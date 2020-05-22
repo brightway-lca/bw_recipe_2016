@@ -46,7 +46,7 @@ class TerrestrialEcotoxicity(ReCiPe2016):
             set_toxicity_categories,
             complete_method_name,
             partial(match_multiple, other=self.biosphere,),
-            partial(match_cas_number, other=self.biosphere,),
+            partial(match_cas_number, other=self.biosphere, exact_category=True),
             chemid_name_mapping,
             partial(match_multiple, other=self.biosphere,),
             chemid_cas_to_name_mapping,
