@@ -136,9 +136,6 @@ Combined with the three perspectives, the following endpoints are available:
 
 #### Ecosystems
 
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Egalitarian')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
-* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Individualist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Aggregated', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Freshwater ecosystems', 'Aggregated', 'Individualist')
@@ -148,6 +145,12 @@ Combined with the three perspectives, the following endpoints are available:
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Terrestrial ecosystems', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Terrestrial ecosystems', 'Aggregated', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Terrestrial ecosystems', 'Aggregated', 'Individualist')
+
+Aggregation of all ecosystem endpoints:
+
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Egalitarian')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Individualist')
 
 #### Human health
 
@@ -160,6 +163,15 @@ Combined with the three perspectives, the following endpoints are available:
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Hierarchist')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Individualist')
+
+### Single score
+
+Note that the ReCiPe 2016 report does not provide aggregation weights for a single score indicator. Weights were taken from
+
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Weighted single score', 'Aggregated', 'Egalitarian')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Weighted single score', 'Aggregated', 'Hierarchist')
+* ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Weighted single score', 'Aggregated', 'Individualist')
+
 
 ## Usage
 

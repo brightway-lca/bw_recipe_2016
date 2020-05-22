@@ -376,14 +376,29 @@ def create_aggregated_endpoints():
         ]
         combine_methods(name, children, metadata)
 
+    for perspective in perspectives:
+        name = BASE_ENDPOINT_NAME + ('Weighted single score', "Aggregated", perspective)
+        metadata = {"unit": "Monetary", "filename": FILENAME, "description": ""}
+        children = [
+            ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Hierarchist'),
+            ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Hierarchist'),
+            ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
+        ]
+        weights = [7.4E4, 1, 3.08E7]
+        combine_methods(name, children, metadata, weights)
 
-def combine_methods(name, methods, metadata):
+
+def combine_methods(name, methods, metadata, weights=None):
     data = defaultdict(float)
+    if weights is None:
+        weights = [1] * len(methods)
+    elif len(weights) != len(methods):
+        raise ValueError
 
     method = Method(name)
     method.register(**metadata)
-    for child in methods:
+    for child, weight in zip(methods, weights):
         for cf, amount in Method(child).load():
-            data[cf] += amount
+            data[cf] += amount * weight
 
     method.write([(k, v) for k, v in data.items()])
