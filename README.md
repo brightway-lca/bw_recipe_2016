@@ -166,7 +166,8 @@ Aggregation of all ecosystem endpoints:
 
 ### Single score
 
-Note that the ReCiPe 2016 report does not provide aggregation weights for a single score indicator. Weights were taken from
+Note that the ReCiPe 2016 report does not provide aggregation weights for a single score indicator. Weights were taken from the Stepwise LCIA method, and adjusted from global species extinction to regional species extinction for one year by dividing by 1000. See [this notebook](https://github.com/brightway-lca/bw_recipe_2016/blob/master/dev/Calculation%20of%20single%20score%20endpoint%20weights.ipynb)
+ to see the relative weights of each input indicator for every activity in ecoinvent 3.6, cutoff system model.
 
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Weighted single score', 'Aggregated', 'Egalitarian')
 * ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Weighted single score', 'Aggregated', 'Hierarchist')
