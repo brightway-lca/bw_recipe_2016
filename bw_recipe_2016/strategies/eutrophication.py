@@ -15,10 +15,17 @@ def add_water_category(data):
     for ds in data:
         to_add, to_remove = [], []
         for cf in ds["exchanges"]:
-            if cf["compartment"] == 'freshwater':
+            if cf["compartment"] == "freshwater":
                 to_remove.append(cf)
                 to_add.extend(
-                    [set_categories(deepcopy(cf), cat) for cat in [("water", "surface water"), ("water",), ("water", "ground-")]]
+                    [
+                        set_categories(deepcopy(cf), cat)
+                        for cat in [
+                            ("water", "surface water"),
+                            ("water",),
+                            ("water", "ground-"),
+                        ]
+                    ]
                 )
             else:
                 cf["categories"] = mapping[cf["compartment"]]

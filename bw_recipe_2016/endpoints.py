@@ -260,15 +260,15 @@ NAME_MAPPING = {
     ),
     ("Mineral resource scarcity", "Egalitarian"): (
         "Resources",
-        ("Mineral Resource Scarcity", 'Egalitarian'),
+        ("Mineral Resource Scarcity", "Egalitarian"),
     ),
     ("Mineral resource scarcity", "Hierarchist"): (
         "Resources",
-        ("Mineral Resource Scarcity", 'Hierarchist'),
+        ("Mineral Resource Scarcity", "Hierarchist"),
     ),
     ("Mineral resource scarcity", "Individualist"): (
         "Resources",
-        ("Mineral Resource Scarcity", 'Individualist'),
+        ("Mineral Resource Scarcity", "Individualist"),
     ),
 }
 
@@ -328,35 +328,52 @@ def create_single_endpoints(data):
 
 def create_aggregated_endpoints():
     UNIT_MAPPING = {
-        'Freshwater ecosystems': 'Species∙yr',
-        'Resources': 'USD (2013)',
-        'Human health': 'DALY',
-        'Marine ecosystems': 'Species∙yr',
-        'Terrestrial ecosystems': 'Species∙yr',
+        "Freshwater ecosystems": "Species∙yr",
+        "Resources": "USD (2013)",
+        "Human health": "DALY",
+        "Marine ecosystems": "Species∙yr",
+        "Terrestrial ecosystems": "Species∙yr",
     }
 
-    sections = ['Freshwater ecosystems', 'Resources', 'Human health', 'Marine ecosystems', 'Terrestrial ecosystems']
+    sections = [
+        "Freshwater ecosystems",
+        "Resources",
+        "Human health",
+        "Marine ecosystems",
+        "Terrestrial ecosystems",
+    ]
     perspectives = ["Egalitarian", "Hierarchist", "Individualist"]
 
     for section in sections:
         for perspective in perspectives:
             name = BASE_ENDPOINT_NAME + (section, "Aggregated", perspective)
             metadata = {
-                'unit': UNIT_MAPPING[section],
-                'filename': FILENAME,
-                'description': ''
+                "unit": UNIT_MAPPING[section],
+                "filename": FILENAME,
+                "description": "",
             }
-            children = [m for m in methods if m[:len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME and perspective in m and section in m and "Aggregated" not in m]
+            children = [
+                m
+                for m in methods
+                if m[: len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME
+                and perspective in m
+                and section in m
+                and "Aggregated" not in m
+            ]
             combine_methods(name, children, metadata)
 
     for perspective in perspectives:
         name = BASE_ENDPOINT_NAME + ("Ecosystems", "Aggregated", perspective)
-        metadata = {
-            'unit': 'Species∙yr',
-            'filename': FILENAME,
-            'description': ''
-        }
-        children = [m for m in methods if m[:len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME and perspective in m and m[3] in ('Freshwater ecosystems', 'Marine ecosystems', 'Terrestrial ecosystems') and m[4] == 'Aggregated']
+        metadata = {"unit": "Species∙yr", "filename": FILENAME, "description": ""}
+        children = [
+            m
+            for m in methods
+            if m[: len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME
+            and perspective in m
+            and m[3]
+            in ("Freshwater ecosystems", "Marine ecosystems", "Terrestrial ecosystems")
+            and m[4] == "Aggregated"
+        ]
         combine_methods(name, children, metadata)
 
 

@@ -17,10 +17,7 @@ def set_toxicity_categories(data):
             ("air", "non-urban air or from high stacks"),
         ],
         "seawater": [("water", "ocean")],
-        "urbanair": [
-            ("air", "urban air close to ground"),
-            ("air", "indoor"),
-        ],
+        "urbanair": [("air", "urban air close to ground"), ("air", "indoor"),],
     }
 
     for ds in data:
