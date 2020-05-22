@@ -63,6 +63,7 @@ from .endpoints import create_single_endpoints, create_aggregated_endpoints
 
 
 def add_recipe_2016():
+    delete_recipe_2016()
     biosphere = get_biosphere_database()
     data = extract_recipe()
     categories = {
