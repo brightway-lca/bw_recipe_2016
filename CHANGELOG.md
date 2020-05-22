@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.2 (2020-05-22)
+
+* `add_recipe_2016` not deletes ReCiPe before importing it
+* Fix error with `match_cas_numbers` not following the given categories and subcategories
+* Deleted duplicate air category in toxicity matching
+* Fixed sign for water CFs
+
 ### 0.1.1 (2020-05-20)
 
 * Added more water categories to eutrophication
