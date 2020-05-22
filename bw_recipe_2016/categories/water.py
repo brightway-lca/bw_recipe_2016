@@ -32,7 +32,14 @@ class WaterConsumption(ReCiPe2016):
             "unit": "m3-eq.",
             "filename": FILENAME,
             "description": "",
-            "exchanges": [{"amount": 1, "name": x, "categories": y} for x, y in FLOWS],
+            "exchanges": [
+                {
+                    "amount": (1 if categories[0] == "natural resource" else -1),
+                    "name": name,
+                    "categories": categories,
+                }
+                for name, categories in FLOWS
+            ],
         }
     ]
 
