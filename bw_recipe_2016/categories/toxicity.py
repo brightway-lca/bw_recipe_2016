@@ -12,7 +12,7 @@ from ..strategies import (
     name_matcher,
 )
 from ..strategies.particulate_matter import complete_method_name
-from ..strategies.toxicity import set_toxicity_categories
+from ..strategies.toxicity import set_toxicity_categories, correct_ion_cas_registry_numbers, drop_unmatchable_ions
 from functools import partial
 
 
@@ -25,10 +25,11 @@ class TerrestrialEcotoxicity(ReCiPe2016):
         "Cr(III)": "chromium, ion",
         "Cr(VI)": "Chromium VI",
         # "Cu(II)": , Ecoinvent only has Copper(I)
-        "Mo(VI)": "Molybdenum",
+        # There are many ions of molybdenum, don't just pick one to apply to all
+        # "Mo(VI)": "Molybdenum",
         "Ni(II)": "Nickel, ion",
         # "Sn(II)": , Ecoinvent only has Tin(IV)
-        "V(V)": "Vanadium, ion",
+        # "V(V)":  Ecoinvent only has V(III)
         "Zn(II)": "Zinc, ion",
     }
     previous_reference = (
@@ -42,6 +43,8 @@ class TerrestrialEcotoxicity(ReCiPe2016):
         self.strategies = [
             partial(generic_reformat, config=self.config),
             fix_unit_string,
+            drop_unmatchable_ions,
+            correct_ion_cas_registry_numbers,
             partial(name_matcher, mapping=self.name_mapping),
             set_toxicity_categories,
             partial(complete_method_name, config=self.config),
