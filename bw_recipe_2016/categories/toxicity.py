@@ -12,7 +12,7 @@ from ..strategies import (
     name_matcher,
 )
 from ..strategies.particulate_matter import complete_method_name
-from ..strategies.toxicity import set_toxicity_categories, correct_ion_cas_registry_numbers, drop_unmatchable_ions
+from ..strategies.toxicity import set_toxicity_categories, correct_ion_cas_registry_numbers, drop_unmatchable_ions, drop_homonyms
 from functools import partial
 
 
@@ -44,6 +44,7 @@ class TerrestrialEcotoxicity(ReCiPe2016):
             partial(generic_reformat, config=self.config),
             fix_unit_string,
             drop_unmatchable_ions,
+            drop_homonyms,
             correct_ion_cas_registry_numbers,
             partial(name_matcher, mapping=self.name_mapping),
             set_toxicity_categories,

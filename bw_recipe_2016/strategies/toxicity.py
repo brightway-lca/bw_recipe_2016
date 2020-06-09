@@ -73,3 +73,17 @@ def drop_unmatchable_ions(data):
     for ds in data:
         ds['exchanges'] = [cf for cf in ds['exchanges'] if cf['name'] not in ECOINVENT_MISSING]
     return data
+
+
+def drop_homonyms(data):
+    """Drop some CFs which have the correct name, but not the correct CAS number, to avoid duplicate matches based on the name alone."""
+    NOT_USED = {
+        ("fenpropathrin", 64257847),
+        ('mecoprop', 7085190),
+        # Slightly cheating here for fenoxycarb - ecoinvent doesn't specify
+        # the correct CAS number, so we take the higher value
+        ('fenoxycarb', 72490018),
+    }
+    for ds in data:
+        ds['exchanges'] = [cf for cf in ds['exchanges'] if (cf['name'].lower(), cf['CAS number']) not in NOT_USED]
+    return data
