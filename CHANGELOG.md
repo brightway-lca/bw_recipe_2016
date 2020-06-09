@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3 (2020-06-09)
+
+* Support three different versions of ReCiPe
+* Fix duplicate characterization factors by solving various problems in ecoinvent and the ReCiPe data
+* Fix some matching bugs that caused duplicate CFs
+
 #### 0.2.1 (2020-05-22)
 
 * Added a weighted single score indicator
