@@ -107,16 +107,20 @@ class MineralResourceScarcity(ReCiPe2016):
             r"Pd, Pd 2.0E-4%, Pt 4.8E-4%, Rh 2.4E-5%, Ni 3.7E-2%, Cu 5.2E-2% in ore, in ground",
             r"Pd, Pd 7.3E-4%, Pt 2.5E-4%, Rh 2.0E-5%, Ni 2.3E+0%, Cu 3.2E+0% in ore, in ground",
         ],
-        "Platinum-group metals": [
-            "Ruthenium, in ground",
-            r"Rhodium, Rh 1.6E-7%, in mixed ore, in ground",
-            "Rhodium, in ground",
-            r"Rh, Rh 2.0E-5%, Pt 2.5E-4%, Pd 7.3E-4%, Ni 2.3E+0%, Cu 3.2E+0% in ore, in ground",
-            r"Rh, Rh 2.4E-5%, Pt 4.8E-4%, Pd 2.0E-4%, Ni 3.7E-2%, Cu 5.2E-2% in ore, in ground",
-            r"Platinum, Pt 4.7E-7%, in mixed ore, in ground",
+        "Platinum": [
             "Platinum, in ground",
+            r"Platinum, Pt 4.7E-7%, in mixed ore, in ground",
             r"pt, pt 2.5e-4%, pd 7.3e-4%, rh 2.0e-5%, ni 2.3e+0%, cu 3.2e+0% in ore, in ground",
             r"pt, pt 4.8e-4%, pd 2.0e-4%, rh 2.4e-5%, ni 3.7e-2%, cu 5.2e-2% in ore, in ground",
+        ],
+        "Rhodium": [
+            "Rhodium, in ground",
+            r"Rhodium, Rh 1.6E-7%, in mixed ore, in ground",
+            r"Rh, Rh 2.0E-5%, Pt 2.5E-4%, Pd 7.3E-4%, Ni 2.3E+0%, Cu 3.2E+0% in ore, in ground",
+            r"Rh, Rh 2.4E-5%, Pt 4.8E-4%, Pd 2.0E-4%, Ni 3.7E-2%, Cu 5.2E-2% in ore, in ground",
+        ],
+        "Platinum-group metals": [
+            "Ruthenium, in ground",
             "Osmium, in ground",
             "Iridium, in ground",
         ],
