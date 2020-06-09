@@ -5,6 +5,7 @@ __all__ = (
     "create_single_endpoints",
     "delete_recipe_2016",
     "extract_recipe",
+    "fix_acrolein",
     "FossilResourceScarcity",
     "FossilResourceScarcityEndpoint",
     "FreshwaterEcotoxicity",
@@ -29,7 +30,7 @@ __all__ = (
 
 
 from .version import version as __version__
-from .biosphere import get_biosphere_database
+from .biosphere import get_biosphere_database, fix_acrolein
 from .extraction import extract_recipe
 from .categories import (
     FossilResourceScarcity,
@@ -58,6 +59,8 @@ from .endpoints import create_single_endpoints, create_aggregated_endpoints
 
 
 def add_recipe_2016(version=2):
+    fix_acrolein()
+
     delete_recipe_2016(version)
     biosphere = get_biosphere_database()
     data = extract_recipe(version)
