@@ -16,13 +16,12 @@ class LandTransformation(ReCiPe2016):
         "NLTP",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = [
-            generic_reformat,
+            partial(generic_reformat, config=self.config),
             set_unit,
-            partial(complete_method_name, name="Land transformation"),
+            partial(complete_method_name, name="Land transformation", config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
         ]
@@ -35,15 +34,14 @@ class LandOccupation(ReCiPe2016):
         "ALOP",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = [
-            generic_reformat,
+            partial(generic_reformat, config=self.config),
             set_unit,
             add_missing_flows,
             reset_categories,
-            partial(complete_method_name, name="Land occupation"),
+            partial(complete_method_name, name="Land occupation", config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
         ]

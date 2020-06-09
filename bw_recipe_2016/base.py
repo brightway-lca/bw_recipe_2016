@@ -1,5 +1,6 @@
 from bw2data import get_activity, Method
 from bw2io.importers.base_lcia import LCIAImporter
+from .config import Config
 from .strategies import (
     fix_perspective_string,
     fix_unit_string,
@@ -7,6 +8,7 @@ from .strategies import (
     more_synonyms,
     split_synonyms,
 )
+from functools import partial
 
 
 class ReCiPe2016(LCIAImporter):
@@ -33,14 +35,18 @@ class ReCiPe2016(LCIAImporter):
     We don't do extraction in the ``Importer`` class, but in a separate function, as we don't want to extract each time a subclass is used.
 
     """
+    def __init__(self, data, biosphere, version=2):
+        self.data = data
+        self.biosphere = biosphere
+        self.config = Config(version)
+        self.global_strategies = [
+            fix_perspective_string,
+            partial(generic_reformat, config=self.config),
+            split_synonyms,
+            more_synonyms,
+            fix_unit_string,
+        ]
 
-    global_strategies = [
-        fix_perspective_string,
-        generic_reformat,
-        split_synonyms,
-        more_synonyms,
-        fix_unit_string,
-    ]
 
     def compare_to_previous(self):
         if not hasattr(self, "previous_reference"):

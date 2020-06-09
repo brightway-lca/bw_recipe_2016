@@ -1,7 +1,4 @@
-from .. import BASE_MIDPOINT_NAME
-
-
-def complete_method_name(data):
+def complete_method_name(data, config):
     for ds in data:
-        ds["name"] = BASE_MIDPOINT_NAME + ds["name"][0]
+        ds["name"] = config.base_midpoint_name + ds["name"][0]
     return data

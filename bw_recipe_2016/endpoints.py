@@ -1,5 +1,6 @@
 from bw2data import methods, Method
-from . import BASE_MIDPOINT_NAME, BASE_ENDPOINT_NAME, FILENAME, get_biosphere_database
+from . import get_biosphere_database
+from .config import Config
 from copy import copy
 from .categories.resources import FossilResourceScarcityEndpoint
 from collections import defaultdict
@@ -273,10 +274,17 @@ NAME_MAPPING = {
 }
 
 
-def create_single_endpoints(data):
+def create_single_endpoints(data, version=2):
+    end_line = {
+        0: 32,
+        1: 33,
+        2: 33,
+    }
+
+    config = Config(version)
     formatted = [
         {label: value for label, value in zip(data[1][0], row[:5])}
-        for row in data[1][1:33]
+        for row in data[1][1:end_line[version]]
         if row[1]
     ]
 
@@ -306,27 +314,33 @@ def create_single_endpoints(data):
             section, ending = NAME_MAPPING[
                 (elem["Midpoint to endpoint conversion factor"]), perspective
             ]
-            midpoint = BASE_MIDPOINT_NAME + ending
+            midpoint = config.base_midpoint_name + ending
             assert midpoint in methods
-            endpoint = BASE_ENDPOINT_NAME + (section,) + ending
+            endpoint = config.base_endpoint_name + (section,) + ending
             if endpoint[-1] != perspective:
                 endpoint += (perspective,)
 
             endpoint_method = Method(endpoint)
             endpoint_method.register(
-                unit=elem["unit"], description="", filename=FILENAME
+                unit=elem["unit"], description="", filename=config.filename
             )
             endpoint_method.write(
                 [(flow, cf * elem[perspective]) for flow, cf in Method(midpoint).load()]
             )
 
-    frse = FossilResourceScarcityEndpoint(get_biosphere_database())
-    frse.apply_strategies()
-    frse.drop_unlinked()
-    frse.write_methods(overwrite=True)
+    frse = FossilResourceScarcityEndpoint(get_biosphere_database(), version)
+    frse.apply_strategies(verbose=False)
+    try:
+        frse.drop_unlinked(verbose=False)
+        frse.write_methods(overwrite=True, verbose=False)
+    except TypeError:
+        frse.drop_unlinked()
+        frse.write_methods(overwrite=True)
 
 
-def create_aggregated_endpoints():
+def create_aggregated_endpoints(version):
+    config = Config(version)
+
     UNIT_MAPPING = {
         "Freshwater ecosystems": "Species∙yr",
         "Resources": "USD (2013)",
@@ -346,16 +360,16 @@ def create_aggregated_endpoints():
 
     for section in sections:
         for perspective in perspectives:
-            name = BASE_ENDPOINT_NAME + (section, "Aggregated", perspective)
+            name = config.base_endpoint_name + (section, "Aggregated", perspective)
             metadata = {
                 "unit": UNIT_MAPPING[section],
-                "filename": FILENAME,
+                "filename": config.filename,
                 "description": "",
             }
             children = [
                 m
                 for m in methods
-                if m[: len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME
+                if m[: len(config.base_endpoint_name)] == config.base_endpoint_name
                 and perspective in m
                 and section in m
                 and "Aggregated" not in m
@@ -363,12 +377,12 @@ def create_aggregated_endpoints():
             combine_methods(name, children, metadata)
 
     for perspective in perspectives:
-        name = BASE_ENDPOINT_NAME + ("Ecosystems", "Aggregated", perspective)
-        metadata = {"unit": "Species∙yr", "filename": FILENAME, "description": ""}
+        name = config.base_endpoint_name + ("Ecosystems", "Aggregated", perspective)
+        metadata = {"unit": "Species∙yr", "filename": config.filename, "description": ""}
         children = [
             m
             for m in methods
-            if m[: len(BASE_ENDPOINT_NAME)] == BASE_ENDPOINT_NAME
+            if m[: len(config.base_endpoint_name)] == config.base_endpoint_name
             and perspective in m
             and m[3]
             in ("Freshwater ecosystems", "Marine ecosystems", "Terrestrial ecosystems")
@@ -377,12 +391,12 @@ def create_aggregated_endpoints():
         combine_methods(name, children, metadata)
 
     for perspective in perspectives:
-        name = BASE_ENDPOINT_NAME + ('Weighted single score', "Aggregated", perspective)
-        metadata = {"unit": "Monetary", "filename": FILENAME, "description": ""}
+        name = config.base_endpoint_name + ('Weighted single score', "Aggregated", perspective)
+        metadata = {"unit": "Monetary", "filename": config.filename, "description": ""}
         children = [
-            ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Human health', 'Aggregated', 'Hierarchist'),
-            ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Resources', 'Aggregated', 'Hierarchist'),
-            ('ReCiPe 2016', 'v1.1 (20180117)', 'Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
+            config.base_name + ('Endpoint', 'Human health', 'Aggregated', 'Hierarchist'),
+            config.base_name + ('Endpoint', 'Resources', 'Aggregated', 'Hierarchist'),
+            config.base_name + ('Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
         ]
         weights = [7.4E4, 1, 3.08E7]
         combine_methods(name, children, metadata, weights)

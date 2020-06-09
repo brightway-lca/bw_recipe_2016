@@ -1,4 +1,3 @@
-from .. import BASE_MIDPOINT_NAME, FILENAME
 from ..base import ReCiPe2016
 from ..strategies import match_single, final_method_name
 from functools import partial
@@ -25,27 +24,30 @@ FLOWS = [
 
 class WaterConsumption(ReCiPe2016):
     previous_reference = ("ReCiPe Midpoint (E) V1.13", "water depletion", "WDP")
-    # Provided data is effectively useless, do it ourselves
-    data = [
-        {
-            "name": BASE_MIDPOINT_NAME + ("Water consumption",),
-            "unit": "m3-eq.",
-            "filename": FILENAME,
-            "description": "",
-            "exchanges": [
-                {
-                    "amount": (1 if categories[0] == "natural resource" else -1),
-                    "name": name,
-                    "categories": categories,
-                }
-                for name, categories in FLOWS
-            ],
-        }
-    ]
 
-    def __init__(self, data, biosphere):
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(None, biosphere, version)
+        self.set_data()
         self.strategies = [
             partial(match_single, other=self.biosphere),
             final_method_name,
+        ]
+
+    def set_data(self):
+        # Provided data is effectively useless, do it ourselves
+        self.data = [
+            {
+                "name": self.config.base_midpoint_name + ("Water consumption",),
+                "unit": "m3-eq.",
+                "filename": self.config.filename,
+                "description": "",
+                "exchanges": [
+                    {
+                        "amount": (1 if categories[0] == "natural resource" else -1),
+                        "name": name,
+                        "categories": categories,
+                    }
+                    for name, categories in FLOWS
+                ],
+            }
         ]

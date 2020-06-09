@@ -1,7 +1,4 @@
-from .. import FILENAME, BASE_MIDPOINT_NAME
-
-
-def generic_reformat(data):
+def generic_reformat(data, config):
     """Change from:
 
             {
@@ -41,7 +38,7 @@ def generic_reformat(data):
         {
             "name": (k, v["perspective"]) if "perspective" in v else (k,),
             "unit": v["unit"],
-            "filename": FILENAME,
+            "filename": config.filename,
             "description": "",
             "exchanges": v["cfs"],
         }
@@ -49,9 +46,9 @@ def generic_reformat(data):
     ]
 
 
-def complete_method_name(data):
+def complete_method_name(data, config):
     for ds in data:
-        ds["name"] = BASE_MIDPOINT_NAME + ds["name"]
+        ds["name"] = config.base_midpoint_name + ds["name"]
     return data
 
 

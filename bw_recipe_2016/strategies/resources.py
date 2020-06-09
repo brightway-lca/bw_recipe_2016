@@ -1,6 +1,3 @@
-from .. import BASE_MIDPOINT_NAME
-
-
 def remove_asterisk(data):
     for ds in data:
         for cf in ds["exchanges"]:
@@ -30,7 +27,7 @@ def add_synonyms(data):
     return data
 
 
-def fossil_method_name(data):
+def fossil_method_name(data, config):
     for ds in data:
-        ds["name"] = BASE_MIDPOINT_NAME + ("Fossil resource scarcity",)
+        ds["name"] = config.base_midpoint_name + ("Fossil resource scarcity",)
     return data

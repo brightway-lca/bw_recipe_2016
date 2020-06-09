@@ -29,16 +29,14 @@ class OzoneFormationHumans(ReCiPe2016):
         "POFP",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = [
-            generic_reformat,
+            partial(generic_reformat, config=self.config),
             fix_unit_string,
             partial(name_matcher, mapping=self.name_mapping),
             add_air_category,
-            drop_last_name_component,
-            # drop_known_missing,
+            partial(drop_last_name_component, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             partial(match_cas_number, other=self.biosphere,),
             chemid_name_mapping,

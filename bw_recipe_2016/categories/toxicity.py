@@ -36,15 +36,14 @@ class TerrestrialEcotoxicity(ReCiPe2016):
         "TETPinf",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = [
-            generic_reformat,
+            partial(generic_reformat, config=self.config),
             fix_unit_string,
             partial(name_matcher, mapping=self.name_mapping),
             set_toxicity_categories,
-            complete_method_name,
+            partial(complete_method_name, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             partial(match_cas_number, other=self.biosphere, exact_category=True),
             chemid_name_mapping,

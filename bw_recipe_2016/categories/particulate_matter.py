@@ -30,14 +30,13 @@ class ParticulateMatterFormation(ReCiPe2016):
         "PMFP",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = [
-            generic_reformat,
+            partial(generic_reformat, config=self.config),
             fix_unit_string,
             partial(name_matcher, mapping=self.name_mapping),
-            complete_method_name,
+            partial(complete_method_name, config=self.config),
             add_air_category,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,

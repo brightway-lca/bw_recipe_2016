@@ -1,8 +1,7 @@
-from .. import BASE_ENDPOINT_NAME, FILENAME
 from ..base import ReCiPe2016
+from ..config import Config
 from ..strategies import (
     fix_unit_string,
-    generic_reformat,
     match_single,
     match_multiple,
     name_matcher,
@@ -188,14 +187,13 @@ class MineralResourceScarcity(ReCiPe2016):
     }
     previous_reference = ("ReCiPe Midpoint (E) V1.13", "metal depletion", "MDP")
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = self.global_strategies + [
             remove_asterisk,
             partial(name_matcher, mapping=self.name_mapping),
             add_synonyms,
-            complete_method_name,
+            partial(complete_method_name, config=self.config),
             add_mineral_natural_resource_category,
             partial(match_single, other=self.biosphere,),
             final_method_name,
@@ -212,12 +210,11 @@ class FossilResourceScarcity(ReCiPe2016):
     }
     previous_reference = ("ReCiPe Midpoint (E) V1.13", "fossil depletion", "FDP")
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = self.global_strategies + [
             partial(name_matcher, mapping=self.name_mapping),
-            fossil_method_name,
+            partial(fossil_method_name, config=self.config),
             add_fossil_natural_resource_category,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
@@ -225,114 +222,117 @@ class FossilResourceScarcity(ReCiPe2016):
 
 
 class FossilResourceScarcityEndpoint(LCIAImporter):
-    data = [
-        {
-            "name": BASE_ENDPOINT_NAME
-            + ("Resources", "Fossil resource scarcity", "Individualist"),
-            "unit": "USD2013/(kg or nM3)",
-            "filename": FILENAME,
-            "description": "",
-            "exchanges": [
-                {
-                    "name": "Oil, crude, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.46,
-                },
-                {
-                    "name": "Gas, natural, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.3,
-                },
-                {
-                    "name": "Coal, hard, unspecified, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.03,
-                },
-                {
-                    "name": "Coal, brown, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.0,
-                },
-                {
-                    "name": "Peat, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.0,
-                },
-            ],
-        },
-        {
-            "name": BASE_ENDPOINT_NAME
-            + ("Resources", "Fossil resource scarcity", "Hierarchist"),
-            "unit": "USD2013/(kg or nM3)",
-            "filename": FILENAME,
-            "description": "",
-            "exchanges": [
-                {
-                    "name": "Oil, crude, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.46,
-                },
-                {
-                    "name": "Gas, natural, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.3,
-                },
-                {
-                    "name": "Coal, hard, unspecified, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.03,
-                },
-                {
-                    "name": "Coal, brown, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.0,
-                },
-                {
-                    "name": "Peat, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.0,
-                },
-            ],
-        },
-        {
-            "name": BASE_ENDPOINT_NAME
-            + ("Resources", "Fossil resource scarcity", "Egalitarian"),
-            "unit": "USD2013/(kg or nM3)",
-            "filename": FILENAME,
-            "description": "",
-            "exchanges": [
-                {
-                    "name": "Oil, crude, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.46,
-                },
-                {
-                    "name": "Gas, natural, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.3,
-                },
-                {
-                    "name": "Coal, hard, unspecified, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.03,
-                },
-                {
-                    "name": "Coal, brown, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.03,
-                },
-                {
-                    "name": "Peat, in ground",
-                    "categories": ("natural resource",),
-                    "amount": 0.03,
-                },
-            ],
-        },
-    ]
-
-    def __init__(self, biosphere):
+    def __init__(self, biosphere, version=2):
         self.biosphere = biosphere
+        self.config = Config(version)
+        self.set_data(version)
         self.strategies = [
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+        ]
+
+    def set_data(self, version):
+        self.data = [
+            {
+                "name": self.config.base_endpoint_name
+                + ("Resources", "Fossil resource scarcity", "Individualist"),
+                "unit": "USD2013/(kg or nM3)",
+                "filename": self.config.filename,
+                "description": "",
+                "exchanges": [
+                    {
+                        "name": "Oil, crude, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.46,
+                    },
+                    {
+                        "name": "Gas, natural, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.3,
+                    },
+                    {
+                        "name": "Coal, hard, unspecified, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.03,
+                    },
+                    {
+                        "name": "Coal, brown, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.0,
+                    },
+                    {
+                        "name": "Peat, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.0,
+                    },
+                ],
+            },
+            {
+                "name": self.config.base_endpoint_name
+                + ("Resources", "Fossil resource scarcity", "Hierarchist"),
+                "unit": "USD2013/(kg or nM3)",
+                "filename": self.config.filename,
+                "description": "",
+                "exchanges": [
+                    {
+                        "name": "Oil, crude, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.46,
+                    },
+                    {
+                        "name": "Gas, natural, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.3,
+                    },
+                    {
+                        "name": "Coal, hard, unspecified, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.03,
+                    },
+                    {
+                        "name": "Coal, brown, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.0,
+                    },
+                    {
+                        "name": "Peat, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.0,
+                    },
+                ],
+            },
+            {
+                "name": self.config.base_endpoint_name
+                + ("Resources", "Fossil resource scarcity", "Egalitarian"),
+                "unit": "USD2013/(kg or nM3)",
+                "filename": self.config.filename,
+                "description": "",
+                "exchanges": [
+                    {
+                        "name": "Oil, crude, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.46,
+                    },
+                    {
+                        "name": "Gas, natural, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.3,
+                    },
+                    {
+                        "name": "Coal, hard, unspecified, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.03,
+                    },
+                    {
+                        "name": "Coal, brown, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.03 if version > 0 else 0,
+                    },
+                    {
+                        "name": "Peat, in ground",
+                        "categories": ("natural resource",),
+                        "amount": 0.03 if version > 0 else 0,
+                    },
+                ],
+            },
         ]

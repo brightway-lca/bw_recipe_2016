@@ -2,7 +2,6 @@ from ..base import ReCiPe2016
 from ..strategies import (
     name_matcher,
     match_single,
-    complete_method_name,
     final_method_name,
 )
 from ..strategies.eutrophication import add_water_category
@@ -22,13 +21,12 @@ class FreshwaterEutrophication(ReCiPe2016):
         "FEP",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = self.global_strategies + [
             partial(name_matcher, mapping=self.name_mapping),
             add_water_category,
-            drop_last_name_component,
+            partial(drop_last_name_component, config=self.config),
             partial(match_single, other=self.biosphere,),
             final_method_name,
         ]
@@ -46,13 +44,12 @@ class MarineEutrophication(ReCiPe2016):
     }
     previous_reference = ("ReCiPe Midpoint (E) V1.13", "marine eutrophication", "MEP")
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = self.global_strategies + [
             partial(name_matcher, mapping=self.name_mapping),
             add_water_category,
-            drop_last_name_component,
+            partial(drop_last_name_component, config=self.config),
             partial(match_single, other=self.biosphere,),
             final_method_name,
         ]

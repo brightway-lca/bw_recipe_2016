@@ -1,5 +1,6 @@
 __all__ = (
     "add_recipe_2016",
+    "Config",
     "create_aggregated_endpoints",
     "create_single_endpoints",
     "delete_recipe_2016",
@@ -27,14 +28,7 @@ __all__ = (
 )
 
 
-BASE_NAME = ("ReCiPe 2016", "v1.1 (20180117)")
-BASE_MIDPOINT_NAME = BASE_NAME + ("Midpoint",)
-BASE_ENDPOINT_NAME = BASE_NAME + ("Endpoint",)
-FILENAME = "ReCiPe2016_CFs_v1.1_20180117.xlsx"
-
-
 from .version import version as __version__
-
 from .biosphere import get_biosphere_database
 from .extraction import extract_recipe
 from .categories import (
@@ -59,48 +53,78 @@ from .categories import (
     TerrestrialEcotoxicity,
     WaterConsumption,
 )
+from .config import Config
 from .endpoints import create_single_endpoints, create_aggregated_endpoints
 
 
-def add_recipe_2016():
-    delete_recipe_2016()
+def add_recipe_2016(version=2):
+    delete_recipe_2016(version)
     biosphere = get_biosphere_database()
-    data = extract_recipe()
-    categories = {
-        (2, GlobalWarming),
-        (3, StratosphericOzoneDepletion),
-        (4, IonizingRadiation),
-        (5, OzoneFormationHumans),
-        (6, ParticulateMatterFormation),
-        (7, OzoneFormationEcosystems),
-        (8, TerrestrialAcidification),
-        (9, FreshwaterEutrophication),
-        (10, MarineEutrophication),
-        (11, TerrestrialEcotoxicity),
-        (12, FreshwaterEcotoxicity),
-        (13, MarineEcotoxicity),
-        (14, HumanCarcinogenicToxicity),
-        (15, HumanNoncarcinogenicToxicity),
-        (16, LandTransformation),
-        (17, LandOccupation),
-        (18, WaterConsumption),
-        (19, MineralResourceScarcity),
-        (20, FossilResourceScarcity),
-    }
+    data = extract_recipe(version)
+    if version > 0:
+        categories = {
+            (2, GlobalWarming),
+            (3, StratosphericOzoneDepletion),
+            (4, IonizingRadiation),
+            (5, OzoneFormationHumans),
+            (6, ParticulateMatterFormation),
+            (7, OzoneFormationEcosystems),
+            (8, TerrestrialAcidification),
+            (9, FreshwaterEutrophication),
+            (10, MarineEutrophication),
+            (11, TerrestrialEcotoxicity),
+            (12, FreshwaterEcotoxicity),
+            (13, MarineEcotoxicity),
+            (14, HumanCarcinogenicToxicity),
+            (15, HumanNoncarcinogenicToxicity),
+            (16, LandTransformation),
+            (17, LandOccupation),
+            (18, WaterConsumption),
+            (19, MineralResourceScarcity),
+            (20, FossilResourceScarcity),
+        }
+    else:
+        categories = {
+            (2, GlobalWarming),
+            (3, StratosphericOzoneDepletion),
+            (4, IonizingRadiation),
+            (5, OzoneFormationHumans),
+            (6, ParticulateMatterFormation),
+            (7, OzoneFormationEcosystems),
+            (8, TerrestrialAcidification),
+            (9, FreshwaterEutrophication),
+            (10, TerrestrialEcotoxicity),
+            (11, FreshwaterEcotoxicity),
+            (12, MarineEcotoxicity),
+            (13, HumanCarcinogenicToxicity),
+            (14, HumanNoncarcinogenicToxicity),
+            (15, LandOccupation),
+            (16, WaterConsumption),
+            (17, MineralResourceScarcity),
+            (18, FossilResourceScarcity),
+        }
     for i, c in categories:
-        category = c(data[i], biosphere)
-        category.apply_strategies()
-        category.drop_unlinked()
-        category.write_methods(overwrite=True)
+        print("Adding {}".format(c.__name__))
+        category = c(data[i], biosphere, version)
+        category.apply_strategies(verbose=False)
+        try:
+            category.drop_unlinked(verbose=False)
+            category.write_methods(overwrite=True, verbose=False)
+        except TypeError:
+            category.drop_unlinked()
+            category.write_methods(overwrite=True)
 
-    create_single_endpoints(data[1])
-    create_aggregated_endpoints()
+    print("Adding single endpoints")
+    create_single_endpoints(data[1], version)
+    print("Adding aggregated endpoints")
+    create_aggregated_endpoints(version)
 
 
-def delete_recipe_2016():
+def delete_recipe_2016(version=2):
     from bw2data import methods
 
+    config = Config(version)
     all_methods = list(methods)
     for method_name in all_methods:
-        if method_name[: len(BASE_NAME)] == BASE_NAME:
+        if method_name[: len(config.base_name)] == config.base_name:
             del methods[method_name]

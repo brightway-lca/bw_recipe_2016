@@ -39,14 +39,13 @@ class IonizingRadiation(ReCiPe2016):
     }
     previous_reference = ("ReCiPe Midpoint (E) V1.13", "ionising radiation", "IRP_HE")
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = self.global_strategies + [
             partial(name_matcher, mapping=self.name_mapping),
             fix_water_categories,
             tupleize_categories,
-            complete_method_name,
+            partial(complete_method_name, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
         ]

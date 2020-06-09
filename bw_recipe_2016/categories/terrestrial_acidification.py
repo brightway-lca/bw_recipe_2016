@@ -30,13 +30,12 @@ class TerrestrialAcidification(ReCiPe2016):
         "TAP500",
     )
 
-    def __init__(self, data, biosphere):
-        self.data = data
-        self.biosphere = biosphere
+    def __init__(self, data, biosphere, version=2):
+        super().__init__(data, biosphere, version)
         self.strategies = self.global_strategies + [
             partial(name_matcher, mapping=self.name_mapping),
             add_air_category,
-            drop_last_name_component,
+            partial(drop_last_name_component, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
         ]

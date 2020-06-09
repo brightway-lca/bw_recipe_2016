@@ -1,9 +1,5 @@
-from . import FILENAME
+from .config import Config
 from .excel_extraction import ExcelExtractor
-from pathlib import Path
-
-DIRPATH = Path(__file__).parent.resolve()
-FILEPATH = DIRPATH / "data" / FILENAME
 
 
 def maybe_number(x):
@@ -127,8 +123,9 @@ class ReCiPeExtractor:
         },
     }
 
-    def __init__(self, filepath=None):
-        self.filepath = filepath or FILEPATH
+    def __init__(self, version=2):
+        config = Config(version)
+        self.filepath = config.filepath
 
     def extract(self):
         self.data = ExcelExtractor.extract(self.filepath)
@@ -166,12 +163,15 @@ class ReCiPeExtractor:
 
     def harmonize(self):
         for k, v in self.config.items():
-            index = self.categories.index(k)
-            self.data[index] = self.harmonize_generic(self.data[index][1], **v)
+            try:
+                index = self.categories.index(k)
+                self.data[index] = self.harmonize_generic(self.data[index][1], **v)
+            except ValueError:
+                print(f"Skipping category {k}, not found in {self.filepath}")
 
 
-def extract_recipe():
-    RE = ReCiPeExtractor()
+def extract_recipe(version=2):
+    RE = ReCiPeExtractor(version)
     RE.extract()
     RE.harmonize()
     return RE.data
