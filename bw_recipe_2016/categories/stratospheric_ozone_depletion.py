@@ -1,10 +1,11 @@
 from ..base import ReCiPe2016
 from ..strategies import (
-    name_matcher,
-    match_multiple,
     add_air_category,
+    check_duplicate_cfs,
     complete_method_name,
     final_method_name,
+    match_multiple,
+    name_matcher,
 )
 from functools import partial
 
@@ -40,4 +41,5 @@ class StratosphericOzoneDepletion(ReCiPe2016):
             partial(complete_method_name, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]

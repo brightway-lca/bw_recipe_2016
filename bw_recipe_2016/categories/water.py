@@ -1,5 +1,5 @@
 from ..base import ReCiPe2016
-from ..strategies import match_single, final_method_name
+from ..strategies import match_single, final_method_name, check_duplicate_cfs
 from functools import partial
 
 FLOWS = [
@@ -31,6 +31,7 @@ class WaterConsumption(ReCiPe2016):
         self.strategies = [
             partial(match_single, other=self.biosphere),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
     def set_data(self):

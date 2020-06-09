@@ -1,11 +1,12 @@
 from ..base import ReCiPe2016
 from ..strategies import (
     add_air_category,
+    check_duplicate_cfs,
+    final_method_name,
     fix_unit_string,
     generic_reformat,
     match_multiple,
     name_matcher,
-    final_method_name,
 )
 from ..strategies.particulate_matter import complete_method_name
 from functools import partial
@@ -40,4 +41,5 @@ class ParticulateMatterFormation(ReCiPe2016):
             add_air_category,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]

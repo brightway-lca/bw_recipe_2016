@@ -1,8 +1,9 @@
 from ..base import ReCiPe2016
 from ..strategies import (
-    name_matcher,
-    match_single,
+    check_duplicate_cfs,
     final_method_name,
+    match_single,
+    name_matcher,
 )
 from ..strategies.eutrophication import add_water_category
 from ..strategies.ozone_formation import drop_last_name_component
@@ -29,6 +30,7 @@ class FreshwaterEutrophication(ReCiPe2016):
             partial(drop_last_name_component, config=self.config),
             partial(match_single, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
 
@@ -52,4 +54,5 @@ class MarineEutrophication(ReCiPe2016):
             partial(drop_last_name_component, config=self.config),
             partial(match_single, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]

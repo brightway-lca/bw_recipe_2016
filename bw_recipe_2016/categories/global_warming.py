@@ -1,10 +1,11 @@
 from ..base import ReCiPe2016
 from ..strategies import (
-    name_matcher,
-    match_multiple,
     add_air_category,
+    check_duplicate_cfs,
     complete_method_name,
     final_method_name,
+    match_multiple,
+    name_matcher,
 )
 from ..strategies.global_warming import add_biomass_stock_cfs
 from functools import partial
@@ -62,4 +63,5 @@ class GlobalWarming(ReCiPe2016):
             # drop_known_missing,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]

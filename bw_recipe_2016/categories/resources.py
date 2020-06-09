@@ -1,19 +1,20 @@
 from ..base import ReCiPe2016
 from ..config import Config
 from ..strategies import (
-    fix_unit_string,
-    match_single,
-    match_multiple,
-    name_matcher,
+    check_duplicate_cfs,
     final_method_name,
+    fix_unit_string,
+    match_multiple,
+    match_single,
+    name_matcher,
 )
 from ..strategies.particulate_matter import complete_method_name
 from ..strategies.resources import (
-    remove_asterisk,
     add_fossil_natural_resource_category,
     add_mineral_natural_resource_category,
     add_synonyms,
     fossil_method_name,
+    remove_asterisk,
 )
 from functools import partial
 from bw2io.importers.base_lcia import LCIAImporter
@@ -197,6 +198,7 @@ class MineralResourceScarcity(ReCiPe2016):
             add_mineral_natural_resource_category,
             partial(match_single, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
 
@@ -218,6 +220,7 @@ class FossilResourceScarcity(ReCiPe2016):
             add_fossil_natural_resource_category,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
 
@@ -229,6 +232,7 @@ class FossilResourceScarcityEndpoint(LCIAImporter):
         self.strategies = [
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
     def set_data(self, version):

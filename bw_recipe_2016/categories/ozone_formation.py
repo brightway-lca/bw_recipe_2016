@@ -1,14 +1,15 @@
 from ..base import ReCiPe2016
 from ..strategies import (
     add_air_category,
+    check_duplicate_cfs,
     chemid_cas_to_name_mapping,
     chemid_name_mapping,
+    final_method_name,
     fix_unit_string,
     generic_reformat,
     match_cas_number,
     match_multiple,
     name_matcher,
-    final_method_name,
 )
 from ..strategies.ozone_formation import drop_last_name_component
 from functools import partial
@@ -44,6 +45,7 @@ class OzoneFormationHumans(ReCiPe2016):
             chemid_cas_to_name_mapping,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
 

@@ -1,10 +1,10 @@
 from ..base import ReCiPe2016
-from ..strategies import match_multiple, generic_reformat, final_method_name
+from ..strategies import match_multiple, generic_reformat, final_method_name, check_duplicate_cfs
 from ..strategies.land import (
-    complete_method_name,
-    set_unit,
-    reset_categories,
     add_missing_flows,
+    complete_method_name,
+    reset_categories,
+    set_unit,
 )
 from functools import partial
 
@@ -24,6 +24,7 @@ class LandTransformation(ReCiPe2016):
             partial(complete_method_name, name="Land transformation", config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
 
 
@@ -44,4 +45,5 @@ class LandOccupation(ReCiPe2016):
             partial(complete_method_name, name="Land occupation", config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]

@@ -1,10 +1,11 @@
 from ..base import ReCiPe2016
 from ..strategies import (
-    name_matcher,
-    match_multiple,
-    fix_water_categories,
-    tupleize_categories,
+    check_duplicate_cfs,
     final_method_name,
+    fix_water_categories,
+    match_multiple,
+    name_matcher,
+    tupleize_categories,
 )
 from ..strategies.particulate_matter import complete_method_name
 from functools import partial
@@ -48,4 +49,5 @@ class IonizingRadiation(ReCiPe2016):
             partial(complete_method_name, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
+            check_duplicate_cfs,
         ]
