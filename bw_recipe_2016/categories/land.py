@@ -1,5 +1,10 @@
 from ..base import ReCiPe2016
-from ..strategies import match_multiple, generic_reformat, final_method_name, check_duplicate_cfs
+from ..strategies import (
+    match_multiple,
+    generic_reformat,
+    final_method_name,
+    check_duplicate_cfs,
+)
 from ..strategies.land import (
     add_missing_flows,
     complete_method_name,
@@ -21,7 +26,9 @@ class LandTransformation(ReCiPe2016):
         self.strategies = [
             partial(generic_reformat, config=self.config),
             set_unit,
-            partial(complete_method_name, name="Land transformation", config=self.config),
+            partial(
+                complete_method_name, name="Land transformation", config=self.config
+            ),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
             partial(check_duplicate_cfs, biosphere=biosphere),

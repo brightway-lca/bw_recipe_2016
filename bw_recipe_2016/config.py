@@ -4,11 +4,7 @@ DIRPATH = Path(__file__).parent.resolve()
 
 
 class Config:
-    mapping = {
-        0: "1.0 (20161004)",
-        1: "1.1 (20170929)",
-        2: "1.1 (20180117)"
-    }
+    mapping = {0: "1.0 (20161004)", 1: "1.1 (20170929)", 2: "1.1 (20180117)"}
     filenames = {
         0: "ReCiPe2016_CFs_v1.0_20161004.xlsx",
         1: "ReCiPe2016_CFs_v1.1_20170929.xlsx",

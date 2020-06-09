@@ -35,6 +35,7 @@ class ReCiPe2016(LCIAImporter):
     We don't do extraction in the ``Importer`` class, but in a separate function, as we don't want to extract each time a subclass is used.
 
     """
+
     def __init__(self, data, biosphere, version=2):
         self.data = data
         self.biosphere = biosphere
@@ -46,7 +47,6 @@ class ReCiPe2016(LCIAImporter):
             more_synonyms,
             fix_unit_string,
         ]
-
 
     def compare_to_previous(self):
         if not hasattr(self, "previous_reference"):

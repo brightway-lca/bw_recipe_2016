@@ -12,7 +12,12 @@ from ..strategies import (
     name_matcher,
 )
 from ..strategies.particulate_matter import complete_method_name
-from ..strategies.toxicity import set_toxicity_categories, correct_ion_cas_registry_numbers, drop_unmatchable_ions, drop_homonyms
+from ..strategies.toxicity import (
+    set_toxicity_categories,
+    correct_ion_cas_registry_numbers,
+    drop_unmatchable_ions,
+    drop_homonyms,
+)
 from functools import partial
 
 
@@ -56,7 +61,7 @@ class TerrestrialEcotoxicity(ReCiPe2016):
             chemid_cas_to_name_mapping,
             partial(match_single, other=self.biosphere,),
             final_method_name,
-            partial(check_duplicate_cfs, biosphere=biosphere)
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
 

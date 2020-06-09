@@ -284,7 +284,7 @@ def create_single_endpoints(data, version=2):
     config = Config(version)
     formatted = [
         {label: value for label, value in zip(data[1][0], row[:5])}
-        for row in data[1][1:end_line[version]]
+        for row in data[1][1 : end_line[version]]
         if row[1]
     ]
 
@@ -378,7 +378,11 @@ def create_aggregated_endpoints(version):
 
     for perspective in perspectives:
         name = config.base_endpoint_name + ("Ecosystems", "Aggregated", perspective)
-        metadata = {"unit": "Species∙yr", "filename": config.filename, "description": ""}
+        metadata = {
+            "unit": "Species∙yr",
+            "filename": config.filename,
+            "description": "",
+        }
         children = [
             m
             for m in methods
@@ -391,14 +395,19 @@ def create_aggregated_endpoints(version):
         combine_methods(name, children, metadata)
 
     for perspective in perspectives:
-        name = config.base_endpoint_name + ('Weighted single score', "Aggregated", perspective)
+        name = config.base_endpoint_name + (
+            "Weighted single score",
+            "Aggregated",
+            perspective,
+        )
         metadata = {"unit": "Monetary", "filename": config.filename, "description": ""}
         children = [
-            config.base_name + ('Endpoint', 'Human health', 'Aggregated', 'Hierarchist'),
-            config.base_name + ('Endpoint', 'Resources', 'Aggregated', 'Hierarchist'),
-            config.base_name + ('Endpoint', 'Ecosystems', 'Aggregated', 'Hierarchist')
+            config.base_name
+            + ("Endpoint", "Human health", "Aggregated", "Hierarchist"),
+            config.base_name + ("Endpoint", "Resources", "Aggregated", "Hierarchist"),
+            config.base_name + ("Endpoint", "Ecosystems", "Aggregated", "Hierarchist"),
         ]
-        weights = [7.4E4, 1, 3.08E7]
+        weights = [7.4e4, 1, 3.08e7]
         combine_methods(name, children, metadata, weights)
 
 
