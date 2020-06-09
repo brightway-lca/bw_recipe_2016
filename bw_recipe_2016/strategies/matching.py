@@ -86,7 +86,7 @@ def match_multiple(data, other):
                 )
             else:
                 for synonym in cf.get("synonyms", []):
-                    if synonym.lower() in other_dict:
+                    if other_dict.get(synonym.lower()):
                         to_remove.append(cf)
                         to_add.extend(
                             [

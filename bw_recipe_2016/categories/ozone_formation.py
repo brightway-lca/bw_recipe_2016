@@ -45,7 +45,7 @@ class OzoneFormationHumans(ReCiPe2016):
             chemid_cas_to_name_mapping,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
 

@@ -39,5 +39,5 @@ class TerrestrialAcidification(ReCiPe2016):
             partial(drop_last_name_component, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]

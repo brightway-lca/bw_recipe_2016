@@ -31,7 +31,7 @@ class WaterConsumption(ReCiPe2016):
         self.strategies = [
             partial(match_single, other=self.biosphere),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
     def set_data(self):

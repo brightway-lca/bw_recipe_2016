@@ -24,7 +24,7 @@ class LandTransformation(ReCiPe2016):
             partial(complete_method_name, name="Land transformation", config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
 
@@ -45,5 +45,5 @@ class LandOccupation(ReCiPe2016):
             partial(complete_method_name, name="Land occupation", config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]

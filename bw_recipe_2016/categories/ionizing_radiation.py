@@ -49,5 +49,5 @@ class IonizingRadiation(ReCiPe2016):
             partial(complete_method_name, config=self.config),
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]

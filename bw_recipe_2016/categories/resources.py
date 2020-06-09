@@ -198,7 +198,7 @@ class MineralResourceScarcity(ReCiPe2016):
             add_mineral_natural_resource_category,
             partial(match_single, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
 
@@ -220,7 +220,7 @@ class FossilResourceScarcity(ReCiPe2016):
             add_fossil_natural_resource_category,
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
 
@@ -232,7 +232,7 @@ class FossilResourceScarcityEndpoint(LCIAImporter):
         self.strategies = [
             partial(match_multiple, other=self.biosphere,),
             final_method_name,
-            check_duplicate_cfs,
+            partial(check_duplicate_cfs, biosphere=biosphere),
         ]
 
     def set_data(self, version):
