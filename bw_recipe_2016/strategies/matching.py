@@ -95,6 +95,7 @@ def match_multiple(data, other):
                                 if category_match(o, cf)
                             ]
                         )
+                        break
         ds["exchanges"] = [cf for cf in ds["exchanges"] if cf not in to_remove] + to_add
     return data
 
