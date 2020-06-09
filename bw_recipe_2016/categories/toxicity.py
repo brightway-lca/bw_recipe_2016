@@ -6,7 +6,7 @@ from ..strategies import (
     fix_unit_string,
     generic_reformat,
     match_cas_number,
-    match_multiple,
+    match_single,
     name_matcher,
     final_method_name,
 )
@@ -44,7 +44,7 @@ class TerrestrialEcotoxicity(ReCiPe2016):
             partial(name_matcher, mapping=self.name_mapping),
             set_toxicity_categories,
             partial(complete_method_name, config=self.config),
-            partial(match_multiple, other=self.biosphere,),
+            partial(match_single, other=self.biosphere,),
             partial(match_cas_number, other=self.biosphere, exact_category=True),
             chemid_name_mapping,
             partial(match_multiple, other=self.biosphere,),
