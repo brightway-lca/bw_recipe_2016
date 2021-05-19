@@ -177,7 +177,7 @@ Note that the ReCiPe 2016 report does not provide aggregation weights for a sing
 ## Usage
 
 ```python
-from bw_recipe_2016 import add_recipe_2016()
+from bw_recipe_2016 import add_recipe_2016
 add_recipe_2016()
 ```
 
