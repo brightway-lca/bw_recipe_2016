@@ -26,6 +26,7 @@ class LandTransformation(ReCiPe2016):
         self.strategies = [
             partial(generic_reformat, config=self.config),
             set_unit,
+            reset_categories,
             partial(
                 complete_method_name, name="Land transformation", config=self.config
             ),
