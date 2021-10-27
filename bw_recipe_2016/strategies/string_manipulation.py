@@ -27,7 +27,7 @@ def split_synonyms(data):
     E.g. ``dinitrogen oxide (nitrous oxide)`` to ``["dinitrogen oxide", "nitrous oxide"]``,"""
     for ds in data:
         for cf in ds["exchanges"]:
-            if "synonyms" in cf:
+            if cf.get("synonyms"):
                 match = multiple.match(cf["synonyms"])
                 if match:
                     cf["synonyms"] = [x.strip() for x in match.groups()]
