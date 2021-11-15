@@ -131,6 +131,8 @@ def delete_recipe_2016(version=2):
     for method_name in all_methods:
         if method_name[: len(config.base_name)] == config.base_name:
             del methods[method_name]
+        if len(method_name) < 3:
+            continue
         older_version = (method_name[0], "v" + method_name[1]) + method_name[2:]
         if older_version[: len(config.base_name)] == config.base_name:
             del methods[older_version]
