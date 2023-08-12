@@ -39,7 +39,10 @@ def category_match(a, b):
     """Return bool, whether the starting categories in a match the categories in b.
 
     For example, ``category_match({'categories': ('foo',)}, {"categories": ('foo', 'bar')})`` is true."""
-    return tuple(a["categories"][: len(b["categories"])]) == tuple(b["categories"])
+    if b["categories"] is not None:
+        return tuple(a["categories"][: len(b["categories"])]) == tuple(b["categories"])
+    else:
+        return tuple(a["categories"])
 
 
 def category_match_exact(a, b):

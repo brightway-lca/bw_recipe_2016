@@ -28,11 +28,14 @@ def split_synonyms(data):
     for ds in data:
         for cf in ds["exchanges"]:
             if cf.get("synonyms"):
-                match = multiple.match(cf["synonyms"])
-                if match:
-                    cf["synonyms"] = [x.strip() for x in match.groups()]
-                elif not isinstance(cf["synonyms"], list):
-                    cf["synonyms"] = [cf["synonyms"].strip()]
+                if cf['synonyms'] is None:
+                    cf["synonyms"] = []
+                else:
+                    match = multiple.match(cf["synonyms"])
+                    if match:
+                        cf["synonyms"] = [x.strip() for x in match.groups()]
+                    elif not isinstance(cf["synonyms"], list):
+                        cf["synonyms"] = [cf["synonyms"].strip()]
             else:
                 cf["synonyms"] = []
     return data
