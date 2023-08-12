@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4 (2023-08-12)
+
+* Merge [#12: Fix TypeError during run](https://github.com/brightway-lca/bw_recipe_2016/pull/12). Thanks @ChristinaKockel!
+* Merge [#9: Fix bug: IndexError: tuple index out of range](https://github.com/brightway-lca/bw_recipe_2016/pull/9). Thanks @BenPortner!
+* Merge [#7: Bug fixes for importing ReCiPe 2016 impact categories into bw projects](https://github.com/brightway-lca/bw_recipe_2016/pull/7). Thanks @juweya!
+* Merge [#5: Documentation fixes](https://github.com/brightway-lca/bw_recipe_2016/pull/5). Thanks @lvandepaer!
+* Fix [#13: Remove psutil dependency](https://github.com/brightway-lca/bw_recipe_2016/issues/13)
+
 ## 0.3 (2020-06-09)
 
 * Support three different versions of ReCiPe
